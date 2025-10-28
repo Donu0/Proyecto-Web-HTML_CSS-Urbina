@@ -17,51 +17,16 @@
             <a href="./index.html">Inicio</a>
             <a href="./quienessomos.html">Quienes somos?</a>
             <a href="./catalogo.html">Catalogo</a>
-            <!-- <a href="./registro.html">Registro</a> -->
             <a href="./acceder.html">Acceder</a>
         </nav>
     </div> 
-
-    <!-- <div class="contenedor">
-        <div class="contenido-hero">
-            <h2>Registro</h2>
-            <p> Si quieres guardar los datos de tu cuenta, por favor registrate con nosotros! </p>
-
-            <form class="formulario">
-                <fieldset>
-                    <legend>Registrate llenando los campos</legend>
-
-                    <div class="contenedor-registro">
-
-                        <div class="campo">
-                            <label>Correo</label>
-                            <input class="input-text" type="email" placeholder="Tu Email">
-                        </div>
-
-                        <div class="campo">
-                            <label>Contraseña</label>
-                            <input class="input-text" type="password" placeholder="Tu Contraseña">
-                        </div>
-
-                    </div> 
-                    
-                </fieldset>
-
-                <div>
-                    <input class="boton stretch" type="submit" value="Enviar">
-                </div>
-                
-
-            </form>
-        </div>
-    </div> -->
 
     <div class="contenedor">
         <div class="contenido-hero">
             <h2>Ingresar</h2>
             <p> Si tienes cuenta inicia sesión o registrate con nosotros! </p>
 
-            <form class="formulario" action="altaUsuario.php" id="form1" name="form1" method="post">
+            <form class="formulario" action="php/altaUsuario.php" id="form1" name="form1" method="post">
                 <fieldset>
                     <legend>Registrate llenando los campos</legend>
 
@@ -69,22 +34,27 @@
 
                         <div class="campo">
                             <label>Nombre</label>
-                            <input class="input-text" type="email" placeholder="Tu Email">
+                            <input class="input-text" type="text" name="nombre" placeholder="Tu Nombre">
                         </div>
 
                         <div class="campo">
                             <label>Apellido</label>
-                            <input class="input-text" type="password" placeholder="Tu Contraseña">
+                            <input class="input-text" type="text" name="apellido" placeholder="Tu Apellido">
+                        </div>
+
+                        <div class="campo">
+                            <label>Teléfono</label>
+                            <input class="input-text" type="text" name="telefono" placeholder="Tu Teléfono">
                         </div>
 
                         <div class="campo">
                             <label>Correo</label>
-                            <input class="input-text" type="email" placeholder="Tu Email">
+                            <input class="input-text" type="email" name="correo" placeholder="Tu Email">
                         </div>
 
                         <div class="campo">
                             <label>Contraseña</label>
-                            <input class="input-text" type="password" placeholder="Tu Contraseña">
+                            <input class="input-text" type="password" name="contrasena" placeholder="Tu Contraseña">
                         </div>
 
                     </div> 
