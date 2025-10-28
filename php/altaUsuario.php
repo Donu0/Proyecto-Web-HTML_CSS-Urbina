@@ -1,8 +1,9 @@
 <?php
     $dbhost = "localhost";
-    $dbname = "sortec";
+    $dbname = "pasteleria";
     $dbuser = "root";
     $dbpass = "";
+    $dbport = "3306";
 
     $nombre = $_POST["nombre"];
     $apellido = $_POST["apellido"];
@@ -13,7 +14,7 @@
     {
         $sql = "INSERT INTO `usuario` ( `idUsuario` , `nombre` , `correo`, `contrasena` ) VALUES ('$idUsuario', '$nombre', '$correo', '$contrasena');";
 
-        $conexion = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname, "3306") or die("*o*");
+        $conexion = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname, $dbport) or die("*o*");
         mysqli_query($conexion, "SELECT * FROM usuario");
         mysqli_query($conexion, $sql);
         mysqli_close($conexion);
