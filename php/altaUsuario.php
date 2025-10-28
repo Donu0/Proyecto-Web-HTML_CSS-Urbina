@@ -24,9 +24,5 @@
         mysqli_query($conexion, "SELECT * FROM usuario");
         mysqli_query($conexion, $sql);
         mysqli_close($conexion);
-
-        echo "<script>";
-        echo "alert('Se insertó');";
-        echo "</script>";
     }
 ?>
