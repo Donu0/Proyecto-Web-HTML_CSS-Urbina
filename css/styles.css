@@ -436,3 +436,17 @@ th, td {
         max-width: 40rem;  /*Solucion super simple para evitar el overflow?*/ 
     }
 }
+
+nav form button {
+    font-family: inherit;
+    font-size: 1rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0;
+}
+
+nav form button:hover {
+    text-decoration: underline;
+}
