@@ -142,6 +142,7 @@ Pero habria que ver como hacerle para acomodarlos imagen por imagen. Que tal que
 
     display: flex;
     flex-direction: column;
+    padding:1rem;
     width:100%;
     align-items: center; /* Esto pq? */
     justify-content: space-evenly;
@@ -216,17 +217,15 @@ Pero habria que ver como hacerle para acomodarlos imagen por imagen. Que tal que
 }
 
 .boton {
-    background-color: gray;
+    background: gray;
     color: white;
-    padding: 1rem;
-    margin:1rem 0 1rem 0;
-    margin-top: 1rem;
-    font-size: 1.6rem;
-    text-transform: uppercase;
+    font-size: medium;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    margin: 0.3rem;
+    border-radius: 5px;
+    cursor: pointer;
     font-weight: bold;
-    border-radius: .5rem;
-    width: 80%;
-    text-align: center;
 }
 
 .boton:hover{
@@ -269,6 +268,7 @@ section .contenido-hero p{
     width: min(60rem,100%); /* Utiliza el valor mas pequeño */
     margin: 0 auto;
     padding: 2rem;
+    margin-bottom: 1rem;
     border-radius: 1rem;
 }
 
