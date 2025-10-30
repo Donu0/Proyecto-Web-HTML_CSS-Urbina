@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-     <header class> 
+
+    <header> 
         <h1 class="titulo">Sortec</h1>
         <span class="subtitulo"> Sorteamos cosas </span> 
     </header>
@@ -31,46 +32,18 @@
                 echo '<a href="./acceder.php">Acceder</a>';
             }
             ?>
-        </nav>
+        </nav> 
     </div> 
 
     <div class="contenedor">
         <div class="contenido-hero">
-            <div class="contenedor-items">
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Carro Tec</p>
-                    <img class="img-cont" src="https://picsum.photos/id/1015/800/300" alt="1">
-                    <button class="boton">Ver mas</button>
-                </div>
-
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Te(c)rmo</p>
-                    <button class="boton">Ver mas</button>
-                </div>
-
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Beca Tec</p>
-                    <button class="boton">Ver mas</button>
-                </div>
-
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Atletismo</p>
-                    <button class="boton">Ver mas</button>
-                </div>
-
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Quimica 2A</p>
-                    <button class="boton">Ver mas</button>
-                </div>
-
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Carne</p>
-                    <button class="boton">Ver mas</button>
-                </div>
-            </div>
+                <p>Quienes somos?</p>
+                <img src="https://picsum.photos/id/1015/800/300" alt="1">
+                <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate, quibusdam dolore molestiae, voluptatum temporibus fugit repellat natus amet ea adipisci, doloremque fugiat est eveniet? Blanditiis veritatis sed vero ipsum cupiditate.
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur blanditiis nemo, eveniet porro itaque odio pariatur facere optio voluptatum vero ipsam vel. Animi, architecto mollitia? Eligendi dignissimos quia veritatis commodi.
+                </p>
         </div>
     </div>
-
 
     <footer class="footer">
         <p>Todos los derechos reservados. (Logitos de copyright y TM)</p>

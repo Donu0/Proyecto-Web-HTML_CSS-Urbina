@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-     <header class> 
+     <header class>
         <h1 class="titulo">Sortec</h1>
         <span class="subtitulo"> Sorteamos cosas </span> 
     </header>
@@ -36,44 +36,43 @@
 
     <div class="contenedor">
         <div class="contenido-hero">
-            <div class="contenedor-items">
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Carro Tec</p>
-                    <img class="img-cont" src="https://picsum.photos/id/1015/800/300" alt="1">
-                    <button class="boton">Ver mas</button>
-                </div>
+            <h2>Añadir Usuarios</h2>
+            <p> Llena los campos con los datos pertinentes </p>
 
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Te(c)rmo</p>
-                    <button class="boton">Ver mas</button>
-                </div>
+            <form class="formulario">
+                <fieldset>
+                    
+                    <div class="contenedor-registro">
 
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Beca Tec</p>
-                    <button class="boton">Ver mas</button>
-                </div>
+                        <div class="campo">
+                            <label>Correo</label>
+                            <input class="input-text" type="email" placeholder="Tu Email">
+                        </div>
 
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Atletismo</p>
-                    <button class="boton">Ver mas</button>
-                </div>
+                        <div class="campo">
+                            <label>Contraseña</label>
+                            <input class="input-text" type="password" placeholder="Tu Contraseña">
+                        </div>
 
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Quimica 2A</p>
-                    <button class="boton">Ver mas</button>
-                </div>
+                        <div class="campo">
+                            <label>Teléfono</label>
+                            <input class="input-text" type="tel" placeholder="Num. Telefonico">
+                        </div>
+                    </div> 
+                    
+                </fieldset>
 
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Carne</p>
-                    <button class="boton">Ver mas</button>
-                </div>
-            </div>
+                <div>
+                    <input class="boton stretch" type="submit" value="Añadir">
+                </div>                
+
+            </form>
         </div>
     </div>
-
 
     <footer class="footer">
         <p>Todos los derechos reservados. (Logitos de copyright y TM)</p>
     </footer>
+    
 </body>
 </html>

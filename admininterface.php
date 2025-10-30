@@ -17,10 +17,14 @@
     <div class="nav-bg">
         <nav class="navegacion-principal contenedor">
             <a href="./index.php">Inicio</a>
-            <a href="./quienessomos.html">Quienes somos?</a>
+            <a href="./quienessomos.php">Quienes somos?</a>
             <a href="./catalogo.php">Catalogo</a>
             <?php
             if ($sesion_activa) {
+                // Si el usuario es admin
+                if ($_SESSION['rol'] === 'admin') {
+                    echo '<a href="./admininterface.php">Admin Panel</a>';
+                }
                 // Si el usuario tiene sesión activa
                 echo '<a href="./logout.php">Cerrar sesión</a>';
             } else {
@@ -38,7 +42,7 @@
             <details open>
                 <summary>Manejar usuarios</summary>
                 <section>
-                    <a class="boton" href="anadirusuario.html">Añadir usuario</a>
+                    <a class="boton" href="altaUsuario.php">Añadir usuario</a>
 
                     <div class="tabla-responsiva">
                         <table>
@@ -46,16 +50,16 @@
                             <tr>
                                 <td>Laura</td><td>laura@example.com</td><td>Admin</td>
                                 <td>
-                                    <a href="edituser.html" class="boton" title="Editar">&#9998;</a>
-                                    <a href="edit-user.html" class="boton" title="Borrar">&#10060;</a> 
+                                    <a href="modificarUsuario.php" class="boton" title="Editar">&#9998;</a>
+                                    <a href="./includes/bajaUsuario.php" class="boton" title="Borrar">&#10060;</a> 
                                 </td>
                             </tr> <!--Esto lo vas a quitar pero es un ejemplo de 
                                         Como deben ir los datos que vas a sacar del SQL. Si quieres anadir mas, solo expande la tabla con los elementos q necesites. -->
                             <tr>
                                 <td>Donovaaaaaaaaaaaaaaaaan</td><td>dono@example.com</td><td>User</td>
                                 <td>
-                                    <a href="edituser.html" class="boton" title="Editar">&#9998;</a>
-                                    <a href="edit-user.html" class="boton" title="Borrar">&#10060;</a> <!-- Si le picas desde aca, simplemente que llame el php para borrar -->
+                                    <a href="modificarUsuario.php" class="boton" title="Editar">&#9998;</a>
+                                    <a href="includes/bajaUsuario.php" class="boton" title="Borrar">&#10060;</a> <!-- Si le picas desde aca, simplemente que llame el php para borrar -->
                                 </td>
                             </tr>          
                         </table>
@@ -66,7 +70,7 @@
             <details>
                 <summary>Manejar Sorteos</summary>
                 <section>
-                    <a class="boton" href="anadirsorteo.html">Añadir Sorteo</a>
+                    <a class="boton" href="altaSorteo.php">Añadir Sorteo</a>
 
                     <div class="tabla-responsiva">
                         <table>
@@ -75,16 +79,16 @@
                             <tr>
                                 <td>001</td><td>Sorteo Carro del año</td><td>05/02/2026</td>
                                 <td>
-                                    <a href="edituser.html" class="boton" title="Editar">&#9998;</a>
-                                    <a href="edit-user.html" class="boton" title="Borrar">&#10060;</a> 
+                                    <a href="modificarSorteo.php" class="boton" title="Editar">&#9998;</a>
+                                    <a href="includes/bajaSorteo.php" class="boton" title="Borrar">&#10060;</a> 
                                 </td>
                             </tr>
 
                             <tr>     
                                 <td>002</td><td>Sorteo 一条Donovan</td><td>10/10/2010</td>
                                 <td>
-                                    <a href="edit-user.html" class="boton" title="Editar">&#9998;</a>
-                                    <a href="edit-user.html" class="boton" title="Borrar">&#10060;</a>
+                                    <a href="modificarSorteo.php" class="boton" title="Editar">&#9998;</a>
+                                    <a href="includes/bajaSorteo.php" class="boton" title="Borrar">&#10060;</a>
                                 </td>
                             </tr>
 

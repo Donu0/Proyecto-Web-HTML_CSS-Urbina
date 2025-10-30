@@ -15,9 +15,9 @@
 
     <div class="nav-bg">
         <nav class="navegacion-principal contenedor">
-            <a href="./index.php">Inicio</a>
+            <a href="./index.html">Inicio</a>
             <a href="./quienessomos.html">Quienes somos?</a>
-            <a href="./catalogo.php">Catalogo</a>
+            <a href="./catalogo.html">Catalogo</a>
             <?php
             if ($sesion_activa) {
                 // Si el usuario es admin
@@ -36,31 +36,34 @@
 
     <div class="contenedor">
         <div class="contenido-hero">
-            <h2>Acceder</h2>
-            <p> Si tienes cuenta inicia sesión o <a href="./registro.html">registrate</a> con nosotros! </p>
+            <h2>Modificar Usuarios</h2>
+            <p> Modifica los datos que desees reemplazar</p>
 
-            <form class="formulario" action="login.php" method="POST">
+            <form class="formulario">
                 <fieldset>
-                    <legend>Ingresa a tu cuenta llenando los campos</legend>
-
+                    
                     <div class="contenedor-registro">
 
                         <div class="campo">
                             <label>Correo</label>
-                            <input class="input-text" type="email" name="correo" placeholder="Tu Email">
+                            <input class="input-text" type="email" placeholder="Tu Email">
                         </div>
 
                         <div class="campo">
                             <label>Contraseña</label>
-                            <input class="input-text" type="password" name="contrasena" placeholder="Tu Contraseña">
+                            <input class="input-text" type="password" placeholder="Tu Contraseña">
                         </div>
 
+                        <div class="campo">
+                            <label>Teléfono</label>
+                            <input class="input-text" type="tel" placeholder="Num. Telefonico">
+                        </div>
                     </div> 
                     
                 </fieldset>
 
                 <div>
-                    <input class="boton stretch" type="submit" value="Iniciar sesión">
+                    <input class="boton stretch" type="submit" value="Añadir">
                 </div>                
 
             </form>
@@ -70,5 +73,6 @@
     <footer class="footer">
         <p>Todos los derechos reservados. (Logitos de copyright y TM)</p>
     </footer>
+    
 </body>
 </html>
