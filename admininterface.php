@@ -42,7 +42,7 @@
             <details open>
                 <summary>Manejar usuarios</summary>
                 <section>
-                    <a class="boton" href="altaUsuario.php">Añadir usuario</a>
+                    <a class="boton" href="registroUsuario.php">Añadir usuario</a>
 
                     <div class="tabla-responsiva">
                         <table>
@@ -51,7 +51,7 @@
                                 <td>Laura</td><td>laura@example.com</td><td>Admin</td>
                                 <td>
                                     <a href="modificarUsuario.php" class="boton" title="Editar">&#9998;</a>
-                                    <a href="./includes/bajaUsuario.php" class="boton" title="Borrar">&#10060;</a> 
+                                    <a href="includes/bajaUsuario.php" class="boton" title="Borrar">&#10060;</a> 
                                 </td>
                             </tr> <!--Esto lo vas a quitar pero es un ejemplo de 
                                         Como deben ir los datos que vas a sacar del SQL. Si quieres anadir mas, solo expande la tabla con los elementos q necesites. -->
@@ -70,7 +70,7 @@
             <details>
                 <summary>Manejar Sorteos</summary>
                 <section>
-                    <a class="boton" href="altaSorteo.php">Añadir Sorteo</a>
+                    <a class="boton" href="registroSorteo.php">Añadir Sorteo</a>
 
                     <div class="tabla-responsiva">
                         <table>

@@ -1,3 +1,4 @@
+<?php include 'includes/verificarSesion.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,13 +36,12 @@
 
     <div class="contenedor">
         <div class="contenido-hero">
-            <h2>Ingresar</h2>
-            <p> Si tienes cuenta inicia sesión o registrate con nosotros! </p>
+            <h2>Añadir Usuarios</h2>
+            <p> Llena los campos con los datos pertinentes </p>
 
-            <form class="formulario" action="php/altaUsuario.php" id="form1" name="form1" method="post">
+            <form class="formulario" action="./includes/altaUsuario.php" id="form1" name="form1" method="post">
                 <fieldset>
-                    <legend>Registrate llenando los campos</legend>
-
+                    
                     <div class="contenedor-registro">
 
                         <div class="campo">
@@ -68,15 +68,25 @@
                             <label>Contraseña</label>
                             <input class="input-text" type="password" name="contrasena" placeholder="Tu Contraseña">
                         </div>
-
+                        
+                        <?php
+                            if ($sesion_activa && $_SESSION['rol'] === 'admin') {
+                            // Si el usuario es admin
+                                echo '<div class="campo">
+                                        <label>Rol</label>
+                                        <input class="input-text" type="text" name="rol" placeholder="admin/usuario">
+                                    </div>';
+                            } else {
+                                echo '<input type="hidden" name="rol" value="usuario">';
+                            }
+                        ?>
                     </div> 
                     
                 </fieldset>
 
                 <div>
                     <input class="boton stretch" type="submit" value="Registrarse">
-                </div>
-                
+                </div>                
 
             </form>
         </div>
@@ -85,5 +95,6 @@
     <footer class="footer">
         <p>Todos los derechos reservados. (Logitos de copyright y TM)</p>
     </footer>
+    
 </body>
 </html>

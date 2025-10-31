@@ -37,7 +37,7 @@
     <div class="contenedor">
         <div class="contenido-hero">
             <h2>Acceder</h2>
-            <p> Si tienes cuenta inicia sesión o <a href="./registro.html">registrate</a> con nosotros! </p>
+            <p> Si tienes cuenta inicia sesión o <a href="./registroUsuario.php">registrate</a> con nosotros! </p>
 
             <form class="formulario" action="login.php" method="POST">
                 <fieldset>

@@ -1,4 +1,3 @@
-<?php include 'includes/verificarSesion.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,36 +35,48 @@
 
     <div class="contenedor">
         <div class="contenido-hero">
-            <h2>Añadir Usuarios</h2>
-            <p> Llena los campos con los datos pertinentes </p>
+            <h2>Ingresar</h2>
+            <p> Si tienes cuenta inicia sesión o registrate con nosotros! </p>
 
-            <form class="formulario">
+            <form class="formulario" action="./includes/altaUsuario.php" id="form1" name="form1" method="post">
                 <fieldset>
-                    
+                    <legend>Registrate llenando los campos</legend>
+
                     <div class="contenedor-registro">
 
                         <div class="campo">
-                            <label>Correo</label>
-                            <input class="input-text" type="email" placeholder="Tu Email">
+                            <label>Nombre</label>
+                            <input class="input-text" type="text" name="nombre" placeholder="Tu Nombre">
                         </div>
 
                         <div class="campo">
-                            <label>Contraseña</label>
-                            <input class="input-text" type="password" placeholder="Tu Contraseña">
+                            <label>Apellido</label>
+                            <input class="input-text" type="text" name="apellido" placeholder="Tu Apellido">
                         </div>
 
                         <div class="campo">
                             <label>Teléfono</label>
-                            <input class="input-text" type="tel" placeholder="Num. Telefonico">
+                            <input class="input-text" type="text" name="telefono" placeholder="Tu Teléfono">
                         </div>
+
+                        <div class="campo">
+                            <label>Correo</label>
+                            <input class="input-text" type="email" name="correo" placeholder="Tu Email">
+                        </div>
+
+                        <div class="campo">
+                            <label>Contraseña</label>
+                            <input class="input-text" type="password" name="contrasena" placeholder="Tu Contraseña">
+                        </div>
+
                     </div> 
                     
                 </fieldset>
 
                 <div>
-                    <input class="boton stretch" type="submit" value="Añadir">
-                </div>                
-
+                    <input class="boton stretch" type="submit" value="Registrarse">
+                </div>
+                
             </form>
         </div>
     </div>
@@ -73,6 +84,5 @@
     <footer class="footer">
         <p>Todos los derechos reservados. (Logitos de copyright y TM)</p>
     </footer>
-    
 </body>
 </html>
