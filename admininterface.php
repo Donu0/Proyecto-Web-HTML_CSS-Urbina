@@ -1,4 +1,12 @@
-<?php include 'includes/verificarSesion.php'; ?>
+<?php include 'includes/verificarSesion.php'; 
+    require 'includes/conexion.php';
+
+    if ($_SESSION['rol'] !== 'admin') {
+        // Redirigir a la página de acceso si no es admin
+        header("Location: acceder.php");
+        exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,24 +53,48 @@
                     <a class="boton" href="registroUsuario.php">Añadir usuario</a>
 
                     <div class="tabla-responsiva">
-                        <table>
-                            <tr><th>Nombre</th><th>Email</th><th>Rol</th></tr> 
-                            <tr>
-                                <td>Laura</td><td>laura@example.com</td><td>Admin</td>
-                                <td>
-                                    <a href="modificarUsuario.php" class="boton" title="Editar">&#9998;</a>
-                                    <a href="includes/bajaUsuario.php" class="boton" title="Borrar">&#10060;</a> 
-                                </td>
-                            </tr> <!--Esto lo vas a quitar pero es un ejemplo de 
-                                        Como deben ir los datos que vas a sacar del SQL. Si quieres anadir mas, solo expande la tabla con los elementos q necesites. -->
-                            <tr>
-                                <td>Donovaaaaaaaaaaaaaaaaan</td><td>dono@example.com</td><td>User</td>
-                                <td>
-                                    <a href="modificarUsuario.php" class="boton" title="Editar">&#9998;</a>
-                                    <a href="includes/bajaUsuario.php" class="boton" title="Borrar">&#10060;</a> <!-- Si le picas desde aca, simplemente que llame el php para borrar -->
-                                </td>
-                            </tr>          
-                        </table>
+                        <?php
+                        // Consulta para obtener todos los usuarios
+                            $sql = "SELECT idUsuario, nombre, apellido, telefono, correo, rol FROM Usuario";
+                            $resultado = $conexion->query($sql);    
+
+                            if ($resultado->num_rows > 0) {
+                                echo '<table class="tabla-usuarios">';
+                                echo '<tr><th>ID</th><th>Nombre</th><th>Apellido</th><th>Teléfono</th><th>Correo</th><th>Rol</th></tr>';
+
+                                while ($fila = $resultado->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>{$fila['idUsuario']}</td>";
+                                    echo "<td>{$fila['nombre']}</td>";
+                                    echo "<td>{$fila['apellido']}</td>";
+                                    echo "<td>{$fila['telefono']}</td>";
+                                    echo "<td>{$fila['correo']}</td>";
+                                    echo "<td>{$fila['rol']}</td>";
+                                    // echo "<td>
+                                    //         <a href='modificarUsuario.php' class='boton' title='Editar'>&#9998;</a>
+                                    //         <a href='includes/bajaUsuario.php' class='boton' title='Borrar'>&#10060;</a>
+                                    //       </td>";
+                                    // echo "</tr>";
+                                    echo "<td class='acciones'>
+                                            <form method='GET' action='modificarUsuario.php' style='display:inline;'>
+                                                <input type='hidden' name='idUsuario' value='{$fila['idUsuario']}'>
+                                                <button type='submit' class='btn-editar'>Editar</button>
+                                            </form>
+                                            <form method='POST' action='includes/bajaUsuario.php' style='display:inline;' onsubmit='return confirmarEliminacion();'>
+                                                <input type='hidden' name='idUsuario' value='{$fila['idUsuario']}'>
+                                                <button type='submit' class='btn-eliminar'>Eliminar</button>
+                                            </form>
+                                        </td>";
+                                    echo "</tr>";
+                                }
+
+                                echo '</table>';
+                            } else {
+                                echo "<p style='text-align:center;'>No hay usuarios registrados.</p>";
+                            }
+
+                            $conexion->close();
+                        ?>
                     </div>
                 </section>
             </details>
