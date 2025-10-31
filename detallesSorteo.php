@@ -42,8 +42,28 @@
                 <p>En este sorteo se dará un termo, procurando recaudar dinero para ayudar al equipo de atletismo y asi financiar nuestro viaje a Queretaro
                     para participar en el nacional de Tecs. </p>
                 <img src="https://picsum.photos/501/300" alt="Imagen random">
+                <br>
+                <h3>🎟️ Selecciona tus boletos</h3>
                 <p> Precio del boleto: $50</p>
-                <a class="boton">Comprar boleto</a>
+                <form action="comprar.php" method="POST">
+                    <div class="boletos">
+                        <?php
+                        $total = 50;
+                        $ocupados = [3, 7, 15, 28, 37];
+
+                        for ($i = 1; $i <= $total; $i++) {
+                            if (!in_array($i, $ocupados)) {
+                                echo "
+                                        <input type='checkbox' id='num$i' name='numeros[]' value='$i'>
+                                        <label for='num$i'>$i</label>
+                                    ";
+                            }
+                        }
+                        ?>
+                    </div>
+                    <button type="submit" class="boton">Comprar seleccionados</button>
+                </form>
+
             </div>
         </div>
     </div>

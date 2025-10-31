@@ -470,3 +470,15 @@ nav form button:hover {
     padding: 2rem;
     width:100%;
 }
+
+.boletos {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center; /* centers children horizontally */
+    justify-content: center;
+    gap: 1rem;
+    background-color: var(--rojo);
+    padding: 2rem;
+    width: 100%;
+}
