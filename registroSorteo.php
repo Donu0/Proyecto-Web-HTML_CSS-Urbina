@@ -72,7 +72,12 @@
                         <div class="campo campo--full">
                             <label>Descripcion Sorteo</label>
                             <input class="input-text" type="text" name ="descripcion">
-                        </div>                        
+                        </div> 
+                        
+                        <div class="campo campo--full">
+                            <label>Imagen del Sorteo</label>
+                            <input class="input-text" type="url" name ="enlaceImagen" placeholder="URL de la imagen">
+                        </div> 
         
                     </div> 
 

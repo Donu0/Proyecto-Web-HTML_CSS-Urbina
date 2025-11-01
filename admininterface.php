@@ -56,12 +56,12 @@
                         <div class="tabla-responsiva">
                             <?php
                             // Consulta para obtener todos los usuarios
-                                $sql = "SELECT idUsuario, nombre, apellido, telefono, correo, contrasena, rol FROM Usuario";
+                                $sql = "SELECT * FROM Usuario";
                                 $resultado = $conexion->query($sql);    
 
                                 if ($resultado->num_rows > 0) {
                                     echo '<table class="tabla-usuarios">';
-                                    echo '<tr><th>Seleccionar</th><th>ID</th><th>Nombre</th><th>Apellido</th><th>Teléfono</th><th>Correo</th><th>Contraseña</th><th>Rol</th></tr>';
+                                    echo '<tr><th>Seleccionar</th><th>ID</th><th>Nombre</th><th>Apellido</th><th>Teléfono</th><th>Correo</th><th>Rol</th></tr>';
 
                                     while ($fila = $resultado->fetch_assoc()) {
                                         echo "<tr>
@@ -71,7 +71,7 @@
                                                 <td>{$fila['apellido']}</td>
                                                 <td>{$fila['telefono']}</td>
                                                 <td>{$fila['correo']}</td>
-                                                <td>{$fila['contrasena']}</td>
+                                                <input type='hidden' name='contrasena' value'{$fila['contrasena']}'>
                                                 <td>{$fila['rol']}</td>
                                                 <td>
                                                     <a href='modificarUsuario.php?Usuario=" . urlencode($fila['idUsuario']) . "' class='boton' title='Editar'>&#9998;</a>
@@ -104,7 +104,7 @@
                         <div class="tabla-responsiva">
                             <?php
                             // Consulta para obtener todos los usuarios
-                                $sql = "SELECT idSorteo, nombreSorteo, descripcion, fechaJuego, organizador, boletosRestantes, precioBoleto FROM sorteo";
+                                $sql = "SELECT * FROM sorteo";
                                 $resultado = $conexion->query($sql);    
 
                                 if ($resultado->num_rows > 0) {
@@ -117,6 +117,7 @@
                                                 <td>{$fila['idSorteo']}</td>
                                                 <td>{$fila['nombreSorteo']}</td>
                                                 <td>{$fila['descripcion']}</td>
+                                                <input type='hidden' name='enlaceImagen' value='{$fila['enlaceImagen']}'> 
                                                 <td>{$fila['fechaJuego']}</td>
                                                 <td>{$fila['organizador']}</td>
                                                 <td>{$fila['boletosRestantes']}</td>

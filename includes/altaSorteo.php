@@ -5,16 +5,18 @@
     $idSorteo = rand(0, 10000000000);
     $nombreSorteo = $_POST["nombreSorteo"];
     $descripcion = $_POST["descripcion"];
+    $enlaceImagen = $_POST["enlaceImagen"];
     $fechaJuego = $_POST["fechaJuego"];
     $organizador = $_POST["organizador"];
     $boletosRestantes = $_POST["boletosRestantes"];
     $precioBoleto = intval($_POST["precioBoleto"]);
 
-    if (($idSorteo>=0) && ($nombreSorteo!="") && ($descripcion!="") && ($fechaJuego!="") && ($organizador!="") && ($boletosRestantes!="") && ($precioBoleto!=""))
+    if (($idSorteo>=0) && ($nombreSorteo!="") && ($descripcion!="") && ($enlaceImagen!="") && ($fechaJuego!="") && ($organizador!="") && ($boletosRestantes!="") && ($precioBoleto!=""))
     {
-        $stmt = $conexion->prepare("INSERT INTO sorteo (idSorteo, nombreSorteo, descripcion, fechaJuego, organizador, boletosRestantes, precioBoleto)
-                                    VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssss", $idSorteo, $nombreSorteo, $descripcion, $fechaJuego, $organizador, $boletosRestantes, $precioBoleto);
+        $stmt = $conexion->prepare("INSERT INTO sorteo (idSorteo, nombreSorteo, descripcion, enlaceImagen, fechaJuego, organizador, boletosRestantes, precioBoleto)
+                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+
+        $stmt->bind_param("ssssssss", $idSorteo, $nombreSorteo, $descripcion, $enlaceImagen, $fechaJuego, $organizador, $boletosRestantes, $precioBoleto);
         $stmt->execute();
         $stmt->close();
 

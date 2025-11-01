@@ -69,7 +69,7 @@
                 <h2><?php echo htmlspecialchars($sorteo['nombreSorteo']); ?></h2>
                 <h3><?php echo htmlspecialchars($sorteo['fechaJuego']); ?></h3>
                 <p><?php echo htmlspecialchars($sorteo['descripcion']); ?></p>
-                <img src="https://picsum.photos/501/300" alt="Imagen random"> <!--- Cambiar enlace imagen, aunque enves de htmlspecialchars usar urlencode -->
+                <img src="<?php echo $sorteo['enlaceImagen']?>" alt="Imagen random"> 
                 <br>
                 <h3>🎟️ Selecciona tus boletos</h3>
                 <p> Precio del boleto: $<?php echo intval($sorteo['precioBoleto']); ?>.00</p>

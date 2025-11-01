@@ -105,8 +105,13 @@
                         <div class="campo campo--full">
                             <label>Descripcion Sorteo</label>
                             <input class="input-text" type="text" name ="descripcion" value="<?php echo htmlspecialchars($sorteo['descripcion']); ?>" required>
-                        </div>                        
-        
+                        </div> 
+                        
+                        <div class="campo campo--full">
+                            <label>Imagen del Sorteo</label>
+                            <input class="input-text" type="url" name="enlaceImagen" value="<?php echo urlencode($sorteo['enlaceImagen']); ?>" required>
+                        </div>
+                    
                     </div>  
                     
                 </fieldset>   
