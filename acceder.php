@@ -16,13 +16,13 @@
     <div class="nav-bg">
         <nav class="navegacion-principal contenedor">
             <a href="./index.php">Inicio</a>
-            <a href="./quienessomos.html">Quienes somos?</a>
+            <a href="./quienesSomos.html">Quienes somos?</a>
             <a href="./catalogo.php">Catalogo</a>
             <?php
             if ($sesion_activa) {
                 // Si el usuario es admin
                 if ($_SESSION['rol'] === 'admin') {
-                    echo '<a href="./admininterface.php">Admin Panel</a>';
+                    echo '<a href="./adminInterface.php">Admin Panel</a>';
                 }
                 // Si el usuario tiene sesión activa
                 echo '<a href="./logout.php">Cerrar sesión</a>';

@@ -23,7 +23,7 @@
         // Si no existe, rediriger a la interfaz de admin
         $stmt->close();
         $conn->close();
-        header("Location: admininterface.php");
+        header("Location: adminInterface.php");
         exit;
     }
 
@@ -48,13 +48,13 @@
     <div class="nav-bg">
         <nav class="navegacion-principal contenedor">
             <a href="./index.html">Inicio</a>
-            <a href="./quienessomos.html">Quienes somos?</a>
+            <a href="./quienesSomos.html">Quienes somos?</a>
             <a href="./catalogo.html">Catalogo</a>
             <?php
             if ($sesion_activa) {
                 // Si el usuario es admin
                 if ($_SESSION['rol'] === 'admin') {
-                    echo '<a href="./admininterface.php">Admin Panel</a>';
+                    echo '<a href="./adminInterface.php">Admin Panel</a>';
                 }
                 // Si el usuario tiene sesión activa
                 echo '<a href="./logout.php">Cerrar sesión</a>';
@@ -116,7 +116,7 @@
 
                 <div>
                     <input class="boton" type="submit" value="Guardar Cambios">
-                    <a href ="admininterface.php" class="boton">Cancelar</a>
+                    <a href ="adminInterface.php" class="boton">Cancelar</a>
                 </div>                
 
             </form>

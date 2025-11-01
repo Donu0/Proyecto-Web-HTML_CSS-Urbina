@@ -24,7 +24,7 @@ if ($result->num_rows > 0) {
 
         // Redireccionar según el rol
         if ($usuario['rol'] === 'admin') {
-            header("Location: admininterface.php");
+            header("Location: adminInterface.php");
         } else {
             header("Location: index.php");
         }

@@ -25,13 +25,13 @@
     <div class="nav-bg">
         <nav class="navegacion-principal contenedor">
             <a href="./index.php">Inicio</a>
-            <a href="./quienessomos.php">Quienes somos?</a>
+            <a href="./quienesSomos.php">Quienes somos?</a>
             <a href="./catalogo.php">Catalogo</a>
             <?php
             if ($sesion_activa) {
                 // Si el usuario es admin
                 if ($_SESSION['rol'] === 'admin') {
-                    echo '<a href="./admininterface.php">Admin Panel</a>';
+                    echo '<a href="./admiInterface.php">Admin Panel</a>';
                 }
                 // Si el usuario tiene sesión activa
                 echo '<a href="./logout.php">Cerrar sesión</a>';
@@ -84,7 +84,7 @@
                                     echo "<p style='text-align:center;'>No hay usuarios registrados.</p>";
                                 }
 
-                                $conexion->close();
+                                //$conexion->close();
                             ?>
                         </div>
 
@@ -95,33 +95,51 @@
                 </section>
             </details>
 
-            <details>
+            <details open>
                 <summary>Manejar Sorteos</summary>
                 <section>
                     <a class="boton" href="registroSorteo.php">Añadir Sorteo</a>
 
-                    <div class="tabla-responsiva">
-                        <table>
+                    <form method="POST" action="./includes/bajaSorteo.php" style="display:inline;">
+                        <div class="tabla-responsiva">
+                            <?php
+                            // Consulta para obtener todos los usuarios
+                                $sql = "SELECT idSorteo, nombreSorteo, descripcion, fechaJuego, organizador, boletosRestantes, precioBoleto FROM sorteo";
+                                $resultado = $conexion->query($sql);    
 
-                            <tr><th>ID</th><th>Nombre</th><th>Fecha de termino</th></tr>
-                            <tr>
-                                <td>001</td><td>Sorteo Carro del año</td><td>05/02/2026</td>
-                                <td>
-                                    <a href="modificarSorteo.php" class="boton" title="Editar">&#9998;</a>
-                                    <a href="includes/bajaSorteo.php" class="boton" title="Borrar">&#10060;</a> 
-                                </td>
-                            </tr>
+                                if ($resultado->num_rows > 0) {
+                                    echo '<table class="tabla-sorteos">';
+                                    echo '<tr><th>Seleccionar</th><th>ID</th><th>Sorteo</th><th>Descripcion</th><th>Fecha de Término</th><th>Organizador</th><th>Disponibles</th><th>Precio</th></tr>';
 
-                            <tr>     
-                                <td>002</td><td>Sorteo 一条Donovan</td><td>10/10/2010</td>
-                                <td>
-                                    <a href="modificarSorteo.php" class="boton" title="Editar">&#9998;</a>
-                                    <a href="includes/bajaSorteo.php" class="boton" title="Borrar">&#10060;</a>
-                                </td>
-                            </tr>
+                                    while ($fila = $resultado->fetch_assoc()) {
+                                        echo "<tr>
+                                                <td><input type='checkbox' name='ids[]' value='{$fila['idSorteo']}'></td>
+                                                <td>{$fila['idSorteo']}</td>
+                                                <td>{$fila['nombreSorteo']}</td>
+                                                <td>{$fila['descripcion']}</td>
+                                                <td>{$fila['fechaJuego']}</td>
+                                                <td>{$fila['organizador']}</td>
+                                                <td>{$fila['boletosRestantes']}</td>
+                                                <td>{$fila['precioBoleto']}</td>
+                                                <td>
+                                                    <a href='modificarSorteo.php?Sorteo=" . urlencode($fila['idSorteo']) . "' class='boton' title='Editar'>&#9998;</a>
+                                                </td>
+                                            </tr>";
+                                    }
 
-                        </table>
-                    </div>
+                                    echo '</table>';
+                                } else {
+                                    echo "<p style='text-align:center;'>No hay sorteos registrados.</p>";
+                                }
+
+                                $conexion->close();
+                            ?>
+                        </div>
+
+                        <div>
+                            <button class="boton" type="submit">Eliminar seleccionado(s)</a>
+                        </div>
+                    </form>
                 </section>
             </details>
              

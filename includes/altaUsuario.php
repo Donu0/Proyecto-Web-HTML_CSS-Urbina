@@ -19,7 +19,8 @@
         $length = 10;
         $idUsuario = substr( str_shuffle( $char_string ), 0, $length );
 
-        $sql = "INSERT INTO `usuario` ( `idUsuario` , `nombre` , `apellido` , `telefono`,  `correo`, `contrasena`, `rol` ) VALUES ('$idUsuario', '$nombre', '$apellido', '$telefono', '$correo', '$contrasena', '$rol');";
+        $sql = "INSERT INTO `usuario` ( `idUsuario` , `nombre` , `apellido` , `telefono`,  `correo`, `contrasena`, `rol` ) 
+                VALUES ('$idUsuario', '$nombre', '$apellido', '$telefono', '$correo', '$contrasena', '$rol');";
 
         $conexion = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname, $dbport) or die("*o*");
         mysqli_query($conexion, "SELECT * FROM usuario");
@@ -29,5 +30,4 @@
         //Después de registrar al usuario, redirigir a la página de acceso
         header("Location: ../acceder.php");
     } 
-
 ?>

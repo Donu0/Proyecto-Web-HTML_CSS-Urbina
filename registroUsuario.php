@@ -16,7 +16,7 @@
     <div class="nav-bg">
         <nav class="navegacion-principal contenedor">
             <a href="./index.php">Inicio</a>
-            <a href="./quienessomos.php">Quienes somos?</a>
+            <a href="./quienesSomos.php">Quienes somos?</a>
             <a href="./catalogo.php">Catalogo</a>
             <?php
             if ($sesion_activa) {
@@ -40,7 +40,7 @@
                 if ($sesion_activa && $_SESSION['rol'] === 'admin') {
                 // Si el usuario es admin
                     echo '<h2>Añadir Usuarios</h2>';
-                    echo '<p>>Llena los campos pertinentes para añadir un nuevo usuario</p>';
+                    echo '<p>Llena los campos pertinentes para añadir un nuevo usuario</p>';
                 } else {
                     echo '<h2>Resgistro</h2>';
                     echo '<p>Registrate llenando los campos con tus datos</p>';
@@ -80,10 +80,13 @@
                         <?php
                             if ($sesion_activa && $_SESSION['rol'] === 'admin') {
                             // Si el usuario es admin
-                                echo '<div class="campo">
+                                echo "<div class='campo'>
                                         <label>Rol</label>
-                                        <input class="input-text" type="text" name="rol" placeholder="admin/usuario">
-                                    </div>';
+                                        <select name='rol' class='input-text'>
+                                            <option value='user' <?php echo 'selected'; ?>Usuario</option>
+                                            <option value='admin' <?php echo 'selected'; ?>Administrador</option>
+                                        </select>
+                                    </div>";
                             } else {
                                 echo '<input type="hidden" name="rol" value="usuario">';
                             }

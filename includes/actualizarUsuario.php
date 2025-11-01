@@ -21,6 +21,6 @@
     }
 
     $conexion->close();
-    header("Location: ../admininterface.php");
+    header("Location: ../adminInterface.php");
     exit;
 ?>
