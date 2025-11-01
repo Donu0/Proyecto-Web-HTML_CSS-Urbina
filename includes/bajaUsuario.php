@@ -1,19 +1,32 @@
 <?php
-    $dbhost = "localhost";
-    $dbname = "sortec";
-    $dbuser = "root";
-    $dbport = "3306";
-    $dbpass = "";
 
-    $idUsuario = $_POST["idUsuario"];
+    require 'conexion.php';
+    session_start();
 
-    if (($idUsuario != "")) 
-    {
-        $sql = "DELETE FROM `usuario` WHERE idUsuario = `idUsuario`;";
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['ids'])) {
+        $ids = $_POST['ids'];
 
-        $conexion = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname, $dbport) or die("*o*");
-        mysqli_query($conexion, "SELECT * FROM usuario");
-        mysqli_query($conexion, $sql);
-        mysqli_close($conexion);
-    }
+        // Validar que todas sean cadenas no vacías
+        $ids_limpios = array_filter($ids, fn($idUsuario) => !empty(trim($idUsuario)));
+
+        if (!empty($ids_limpios)) {
+            // Crear placeholders dinámicos para consulta preparada
+            $placeholders = implode(',', array_fill(0, count($ids_limpios), '?'));
+
+            // Preparar consulta segura
+            $sql = "DELETE FROM Usuario WHERE idUsuario IN ($placeholders)";
+            $stmt = $conexion->prepare($sql);
+
+            // Vincular parámetros dinámicamente
+            $tipos = str_repeat('s', count($ids_limpios)); // todas son cadenas
+            $stmt->bind_param($tipos, ...$ids_limpios);
+
+            $stmt->execute();
+            $stmt->close();
+        }
+}
+
+    $conexion->close();
+    header("Location: ../admininterface.php");
+    exit();
 ?>

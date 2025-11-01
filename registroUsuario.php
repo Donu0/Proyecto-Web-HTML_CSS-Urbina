@@ -36,8 +36,16 @@
 
     <div class="contenedor">
         <div class="contenido-hero">
-            <h2>Añadir Usuarios</h2>
-            <p> Llena los campos con los datos pertinentes </p>
+            <?php
+                if ($sesion_activa && $_SESSION['rol'] === 'admin') {
+                // Si el usuario es admin
+                    echo '<h2>Añadir Usuarios</h2>';
+                    echo '<p>>Llena los campos pertinentes para añadir un nuevo usuario</p>';
+                } else {
+                    echo '<h2>Resgistro</h2>';
+                    echo '<p>Registrate llenando los campos con tus datos</p>';
+                }
+            ?>
 
             <form class="formulario" action="./includes/altaUsuario.php" id="form1" name="form1" method="post">
                 <fieldset>

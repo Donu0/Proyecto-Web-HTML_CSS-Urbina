@@ -1,4 +1,36 @@
-<?php include 'includes/verificarSesion.php'; ?>
+<?php include 'includes/verificarSesion.php';
+    //Por el momento solo el admin puede modificar usuarios
+    if ($usuario_rol !== 'admin') {
+        header("Location: index.php");
+        exit;
+    } 
+
+    // Validar que venga el parámetro id
+    if (!isset($_GET['Usuario']) || empty($_GET['Usuario'])) {
+        header("Location: adminInterface.php");
+        exit;
+    }
+
+    $idUsuario = $_GET['Usuario'];
+
+    // Consultar datos del usuario
+    $stmt = $conexion->prepare("SELECT * FROM Usuario WHERE idUsuario = ?");
+    $stmt->bind_param("s", $idUsuario);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 0) {
+        // Si no existe, rediriger a la interfaz de admin
+        $stmt->close();
+        $conn->close();
+        header("Location: admininterface.php");
+        exit;
+    }
+
+    $usuario = $result->fetch_assoc();
+    $stmt->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,31 +71,52 @@
             <h2>Modificar Usuarios</h2>
             <p> Modifica los datos que desees reemplazar</p>
 
-            <form class="formulario">
+            <form method="POST" action="includes/actualizarUsuario.php" class="formulario">
                 <fieldset>
                     
                     <div class="contenedor-registro">
-
+                        <input type="hidden" name="idUsuario" value="<?php echo htmlspecialchars($usuario['idUsuario']); ?>">
+                        
                         <div class="campo">
-                            <label>Correo</label>
-                            <input class="input-text" type="email" placeholder="Tu Email">
+                            <label>Nombre</label>
+                            <input class="input-text" type="text" name="nombre" value="<?php echo htmlspecialchars($usuario['nombre']); ?>" required>
                         </div>
 
                         <div class="campo">
-                            <label>Contraseña</label>
-                            <input class="input-text" type="password" placeholder="Tu Contraseña">
+                            <label>Apellido</label>
+                            <input class="input-text" type="text" name="apellido" value="<?php echo htmlspecialchars($usuario['apellido']); ?>" required>
                         </div>
 
                         <div class="campo">
                             <label>Teléfono</label>
-                            <input class="input-text" type="tel" placeholder="Num. Telefonico">
+                            <input class="input-text" type="text" name="telefono" value="<?php echo $usuario['telefono']; ?>" required>
                         </div>
+                        
+                        <div class="campo">
+                            <label>Correo</label>
+                            <input class="input-text" type="email" name="correo" value="<?php echo htmlspecialchars($usuario['correo']); ?>" required>
+                        </div>
+
+                        <div class="campo">
+                            <label>Contraseña</label>
+                            <input class="input-text" type="password" name="contrasena" value="<?php echo htmlspecialchars($usuario['contrasena']); ?>" required>
+                        </div>
+
+                        <div class='campo'>
+                            <label>Rol</label>
+                            <select name='rol' class='input-text' required>
+                                <option value='user' <?php if ($usuario['rol'] === 'user') echo 'selected'; ?>>Usuario</option>
+                                <option value='admin' <?php if ($usuario['rol'] === 'admin') echo 'selected'; ?>>Administrador</option>
+                            </select>
+                        </div>
+
                     </div> 
                     
                 </fieldset>
 
                 <div>
-                    <input class="boton stretch" type="submit" value="Añadir">
+                    <input class="boton" type="submit" value="Guardar Cambios">
+                    <a href ="admininterface.php" class="boton">Cancelar</a>
                 </div>                
 
             </form>

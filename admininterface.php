@@ -52,50 +52,46 @@
                 <section>
                     <a class="boton" href="registroUsuario.php">Añadir usuario</a>
 
-                    <div class="tabla-responsiva">
-                        <?php
-                        // Consulta para obtener todos los usuarios
-                            $sql = "SELECT idUsuario, nombre, apellido, telefono, correo, rol FROM Usuario";
-                            $resultado = $conexion->query($sql);    
+                    <form method="POST" action="./includes/bajaUsuario.php" style="display:inline;">
+                        <div class="tabla-responsiva">
+                            <?php
+                            // Consulta para obtener todos los usuarios
+                                $sql = "SELECT idUsuario, nombre, apellido, telefono, correo, contrasena, rol FROM Usuario";
+                                $resultado = $conexion->query($sql);    
 
-                            if ($resultado->num_rows > 0) {
-                                echo '<table class="tabla-usuarios">';
-                                echo '<tr><th>ID</th><th>Nombre</th><th>Apellido</th><th>Teléfono</th><th>Correo</th><th>Rol</th></tr>';
+                                if ($resultado->num_rows > 0) {
+                                    echo '<table class="tabla-usuarios">';
+                                    echo '<tr><th>Seleccionar</th><th>ID</th><th>Nombre</th><th>Apellido</th><th>Teléfono</th><th>Correo</th><th>Contraseña</th><th>Rol</th></tr>';
 
-                                while ($fila = $resultado->fetch_assoc()) {
-                                    echo "<tr>";
-                                    echo "<td>{$fila['idUsuario']}</td>";
-                                    echo "<td>{$fila['nombre']}</td>";
-                                    echo "<td>{$fila['apellido']}</td>";
-                                    echo "<td>{$fila['telefono']}</td>";
-                                    echo "<td>{$fila['correo']}</td>";
-                                    echo "<td>{$fila['rol']}</td>";
-                                    // echo "<td>
-                                    //         <a href='modificarUsuario.php' class='boton' title='Editar'>&#9998;</a>
-                                    //         <a href='includes/bajaUsuario.php' class='boton' title='Borrar'>&#10060;</a>
-                                    //       </td>";
-                                    // echo "</tr>";
-                                    echo "<td class='acciones'>
-                                            <form method='GET' action='modificarUsuario.php' style='display:inline;'>
-                                                <input type='hidden' name='idUsuario' value='{$fila['idUsuario']}'>
-                                                <button type='submit' class='btn-editar'>Editar</button>
-                                            </form>
-                                            <form method='POST' action='includes/bajaUsuario.php' style='display:inline;' onsubmit='return confirmarEliminacion();'>
-                                                <input type='hidden' name='idUsuario' value='{$fila['idUsuario']}'>
-                                                <button type='submit' class='btn-eliminar'>Eliminar</button>
-                                            </form>
-                                        </td>";
-                                    echo "</tr>";
+                                    while ($fila = $resultado->fetch_assoc()) {
+                                        echo "<tr>
+                                                <td><input type='checkbox' name='ids[]' value='{$fila['idUsuario']}'></td>
+                                                <td>{$fila['idUsuario']}</td>
+                                                <td>{$fila['nombre']}</td>
+                                                <td>{$fila['apellido']}</td>
+                                                <td>{$fila['telefono']}</td>
+                                                <td>{$fila['correo']}</td>
+                                                <td>{$fila['contrasena']}</td>
+                                                <td>{$fila['rol']}</td>
+                                                <td>
+                                                    <a href='modificarUsuario.php?Usuario=" . urlencode($fila['idUsuario']) . "' class='boton' title='Editar'>&#9998;</a>
+                                                </td>
+                                            </tr>";
+                                    }
+
+                                    echo '</table>';
+                                } else {
+                                    echo "<p style='text-align:center;'>No hay usuarios registrados.</p>";
                                 }
 
-                                echo '</table>';
-                            } else {
-                                echo "<p style='text-align:center;'>No hay usuarios registrados.</p>";
-                            }
+                                $conexion->close();
+                            ?>
+                        </div>
 
-                            $conexion->close();
-                        ?>
-                    </div>
+                        <div>
+                            <button class="boton" type="submit">Eliminar seleccionado(s)</a>
+                        </div>
+                    </form>
                 </section>
             </details>
 
@@ -128,8 +124,9 @@
                     </div>
                 </section>
             </details>
-
-            <details>
+             
+            <!-- Creo que por el momento no es necesario, lo dejaré para el final -->
+            <!-- <details>
                 <summary>Sesiones y Login</summary>
                 <section>
                     <div class="tabla-responsiva">
@@ -147,8 +144,7 @@
                         </table>
                     </div>
                 </section>
-            </details>
-            
+            </details> -->
         </div>
     </div>
 
