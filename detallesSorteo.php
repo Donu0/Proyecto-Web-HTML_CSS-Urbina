@@ -65,7 +65,6 @@
     <div class="contenedor">
         <div class="contenido-hero">
             <div class="contenedor-detalles">
-                <input type="hidden" name="idSorteo" value="<?php echo htmlspecialchars($sorteo['idSorteo']); ?>">
                 <h2><?php echo htmlspecialchars($sorteo['nombreSorteo']); ?></h2>
                 <h3><?php echo htmlspecialchars($sorteo['fechaJuego']); ?></h3>
                 <p><?php echo htmlspecialchars($sorteo['descripcion']); ?></p>
@@ -74,10 +73,11 @@
                 <h3>🎟️ Selecciona tus boletos</h3>
                 <p> Precio del boleto: $<?php echo intval($sorteo['precioBoleto']); ?>.00</p>
                 <form action="comprar.php" method="POST">
+                    <input type="hidden" name="idSorteo" value="<?php echo htmlspecialchars($sorteo['idSorteo']); ?>">
                     <div class="boletos">
                         <?php
                         $disponibles = intval($sorteo['boletosRestantes']);
-                        $comprados = [3, 7, 15, 28, 37];
+                        $comprados = [3, 7, 15, 28, 37]; //Deberá agregar los valores en la tabla boletos
 
                         for ($i = 1; $i <= $disponibles; $i++) {
                             if (!in_array($i, $comprados)) {
