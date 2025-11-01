@@ -71,7 +71,7 @@
 
                         <div class="campo campo--full">
                             <label>Descripcion Sorteo</label>
-                            <textarea class="input-text" name ="descripcion"></textarea>
+                            <input class="input-text" type="text" name ="descripcion">
                         </div>                        
         
                     </div> 

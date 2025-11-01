@@ -1,4 +1,6 @@
-<?php include 'includes/verificarSesion.php'; ?>
+<?php include 'includes/verificarSesion.php'; 
+    require 'includes/conexion.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,36 +39,33 @@
     <div class="contenedor">
         <div class="contenido-hero">
             <div class="contenedor-items">
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Carro Tec</p>
-                    <img class="img-cont" src="https://picsum.photos/id/1015/800/300" alt="1">
-                    <button class="boton">Ver mas</button>
-                </div>
+                <form method="POST" action="./detallesSorteo.php" style="display:inline;">
+                        <div class="tabla-responsiva">
+                            <?php
+                            // Consulta para obtener todos los sorteos disponibles
+                                $sql = "SELECT idSorteo, nombreSorteo, fechaJuego FROM sorteo"; //Aqui iría el otro atributo enlaceImagen
+                                $resultado = $conexion->query($sql);    
 
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Te(c)rmo</p>
-                    <button class="boton">Ver mas</button>
-                </div>
+                                if ($resultado->num_rows > 0) {
 
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Beca Tec</p>
-                    <button class="boton">Ver mas</button>
-                </div>
+                                    while ($fila = $resultado->fetch_assoc()) {
+                                        echo "<div class='item-sorteo'>
+                                                <p class='descriptor'>{$fila['nombreSorteo']}</p>
+                                                <img class='img-cont' src='https://picsum.photos/id/1015/800/300' alt='1'>
+                                                <p hidden>{$fila['idSorteo']}</p>
+                                                <p class='descriptor'> Juega el: {$fila['fechaJuego']}</p>
+                                                <a href='detallesSorteo.php?Sorteo=" . urlencode($fila['idSorteo']) . "' class='boton stretch' title='detalles'>Ver más</a>
+                                                </div>
+                                                <br>";
+                                    }
+                                } else {
+                                    echo "<p style='text-align:center;'>No hay sorteos disponibles.</p>";
+                                }
 
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Atletismo</p>
-                    <button class="boton">Ver mas</button>
-                </div>
-
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Quimica 2A</p>
-                    <button class="boton">Ver mas</button>
-                </div>
-
-                <div class="item-sorteo">
-                    <p class="descriptor">Sorteo Carne</p>
-                    <button class="boton">Ver mas</button>
-                </div>
+                                $conexion->close();
+                            ?>
+                        </div>
+                    </form>
             </div>
         </div>
     </div>

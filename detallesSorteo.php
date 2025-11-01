@@ -1,4 +1,32 @@
-<?php include 'includes/verificarSesion.php'; ?>
+<?php include 'includes/verificarSesion.php';
+   require 'includes/conexion.php';
+
+    // Validar que venga el parámetro id
+    if (!isset($_GET['Sorteo']) || empty($_GET['Sorteo'])) {
+        header("Location: catalogo.php");
+        exit;
+    }
+
+    $idSorteo = $_GET['Sorteo'];
+
+    // Consultar datos del usuario
+    $stmt = $conexion->prepare("SELECT * FROM Sorteo WHERE idSorteo = ?");
+    $stmt->bind_param("s", $idSorteo);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 0) {
+        // Si no existe, rediriger a la interfaz de admin
+        $stmt->close();
+        $conn->close();
+        header("Location: catalogo.php");
+        exit;
+    }
+
+    $sorteo = $result->fetch_assoc();
+    $stmt->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,22 +65,22 @@
     <div class="contenedor">
         <div class="contenido-hero">
             <div class="contenedor-detalles">
-                <h2>Sorteo Termo</h2>
-                <h3>Fecha de termino: 27/10/25</h3>
-                <p>En este sorteo se dará un termo, procurando recaudar dinero para ayudar al equipo de atletismo y asi financiar nuestro viaje a Queretaro
-                    para participar en el nacional de Tecs. </p>
-                <img src="https://picsum.photos/501/300" alt="Imagen random">
+                <input type="hidden" name="idSorteo" value="<?php echo htmlspecialchars($sorteo['idSorteo']); ?>">
+                <h2><?php echo htmlspecialchars($sorteo['nombreSorteo']); ?></h2>
+                <h3><?php echo htmlspecialchars($sorteo['fechaJuego']); ?></h3>
+                <p><?php echo htmlspecialchars($sorteo['descripcion']); ?></p>
+                <img src="https://picsum.photos/501/300" alt="Imagen random"> <!--- Cambiar enlace imagen, aunque enves de htmlspecialchars usar urlencode -->
                 <br>
                 <h3>🎟️ Selecciona tus boletos</h3>
-                <p> Precio del boleto: $50</p>
+                <p> Precio del boleto: $<?php echo intval($sorteo['precioBoleto']); ?>.00</p>
                 <form action="comprar.php" method="POST">
                     <div class="boletos">
                         <?php
-                        $total = 50;
-                        $ocupados = [3, 7, 15, 28, 37];
+                        $disponibles = intval($sorteo['boletosRestantes']);
+                        $comprados = [3, 7, 15, 28, 37];
 
-                        for ($i = 1; $i <= $total; $i++) {
-                            if (!in_array($i, $ocupados)) {
+                        for ($i = 1; $i <= $disponibles; $i++) {
+                            if (!in_array($i, $comprados)) {
                                 echo "
                                         <input type='checkbox' id='num$i' name='numeros[]' value='$i'>
                                         <label for='num$i'>$i</label>

@@ -104,7 +104,7 @@
 
                         <div class="campo campo--full">
                             <label>Descripcion Sorteo</label>
-                            <textarea class="input-text" name ="descripcion" value="<?php echo htmlspecialchars($sorteo['descripcion']); ?>" required></textarea>
+                            <input class="input-text" type="text" name ="descripcion" value="<?php echo htmlspecialchars($sorteo['descripcion']); ?>" required>
                         </div>                        
         
                     </div>  

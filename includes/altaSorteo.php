@@ -8,7 +8,7 @@
     $fechaJuego = $_POST["fechaJuego"];
     $organizador = $_POST["organizador"];
     $boletosRestantes = $_POST["boletosRestantes"];
-    $precioBoleto = inttval($_POST["precioBoleto"]);
+    $precioBoleto = intval($_POST["precioBoleto"]);
 
     if (($idSorteo>=0) && ($nombreSorteo!="") && ($descripcion!="") && ($fechaJuego!="") && ($organizador!="") && ($boletosRestantes!="") && ($precioBoleto!=""))
     {
