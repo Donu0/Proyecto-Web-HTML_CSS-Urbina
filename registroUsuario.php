@@ -96,7 +96,13 @@
                 </fieldset>
 
                 <div>
-                    <input class="boton stretch" type="submit" value="Registrarse">
+                    <?php        
+                        if ($sesion_activa && $_SESSION['rol'] === 'admin') {
+                            // Si el usuario es admin
+                            echo '<input class="boton stretch" type="submit" value="Añadir Usuario">';
+                        } else {
+                            echo '<input class="boton stretch" type="submit" value="Registrarse">';
+                        } ?>
                 </div>                
 
             </form>

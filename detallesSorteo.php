@@ -1,5 +1,9 @@
-<?php include 'includes/verificarSesion.php';
-   require 'includes/conexion.php';
+<?php 
+    include 'includes/verificarSesion.php';
+    require 'includes/conexion.php';
+
+    // Para el pago con paypal o alguna otra forma de pago
+    $baseUrl = 'https://localhost/Proyecto-Web-HTML_CSS-Urbina/';
 
     // Validar que venga el parámetro id
     if (!isset($_GET['Sorteo']) || empty($_GET['Sorteo'])) {
@@ -72,26 +76,61 @@
                 <br>
                 <h3>🎟️ Selecciona tus boletos</h3>
                 <p> Precio del boleto: $<?php echo intval($sorteo['precioBoleto']); ?>.00</p>
-                <form action="comprar.php" method="POST">
+                <form action="includes/procesarCompra.php" method="POST">
                     <input type="hidden" name="idSorteo" value="<?php echo htmlspecialchars($sorteo['idSorteo']); ?>">
                     <div class="boletos">
                         <?php
                         $disponibles = intval($sorteo['boletosRestantes']);
-                        $comprados = [3, 7, 15, 28, 37]; //Deberá agregar los valores en la tabla boletos
+                        //Arreglo dinámico para guardar los números de los boletos comprados
+                        $comprados = [];
+
+                        $stmtBoletos = $conexion->prepare("SELECT numero FROM Boleto WHERE idSorteo = ?");
+                        $stmtBoletos->bind_param("i", $idSorteo);
+                        $stmtBoletos->execute();
+                        $resultBoletos = $stmtBoletos->get_result();
+
+                        while ($filaBoleto = $resultBoletos->fetch_assoc()) {
+                        $comprados[] = intval($filaBoleto['numero']);
+                        }
+
+                        $stmtBoletos->close();
+
+                        //Los boletos comprados no se muestran
 
                         for ($i = 1; $i <= $disponibles; $i++) {
                             if (!in_array($i, $comprados)) {
                                 echo "
-                                        <input type='checkbox' id='num$i' name='numeros[]' value='$i'>
-                                        <label for='num$i'>$i</label>
-                                    ";
+                                    <input type='checkbox' id='num$i' name='numeros[]' value='$i'>
+                                    <label for='num$i'>$i</label>
+                                ";
                             }
                         }
+                        
+                        // Los boletos comprados se muestran como no disponibles
+
+                        //$totalBoletos = $disponibles + count($comprados); // Para que se muestren todos los boletos
+
+                        // for ($i = 1; $i <= $totalBoletos; $i++) {
+                        //     if (in_array($i, $comprados)) {
+                        //         // Boleto ya comprado su checkbox es rojo y deshabilitado, en teoría, nomás los muestra deshabilitados
+                        //         echo "
+                        //             <input type='checkbox' id='num$i' disabled class='boleto-comprado'>
+                        //             <label for='num$i' class='boleto-label'>$i</label>
+                        //         ";
+                        //     } else {
+                        //         // Boleto disponible tiene checkbox normal
+                        //         echo "
+                        //             <input type='checkbox' id='num$i' name='numeros[]' value='$i'>
+                        //             <label for='num$i' class='boleto-label'>$i</label>
+                        //         ";
+                        //     }
+                        // }
                         ?>
                     </div>
-                    <button type="submit" class="boton">Comprar seleccionados</button>
+                    <div>
+                        <button type="submit" class="boton">Comprar seleccionados</button>
+                    </div>
                 </form>
-
             </div>
         </div>
     </div>

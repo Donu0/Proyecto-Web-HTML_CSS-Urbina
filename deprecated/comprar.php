@@ -1,10 +1,10 @@
 <?php
-    require 'includes/conexion.php';
-    include 'includes/verificarSesion.php'; // Solo para mantener la sesión si existe
+    require 'conexion.php';
+    include 'verificarSesion.php'; // Solo para mantener la sesión si existe
 
     // Validar que venga el id del sorteo
     if (!isset($_POST['numeros']) || !isset($_POST['idSorteo'])) {
-        header("Location: catalogo.php");
+        header("Location: ../catalogo.php");
         exit;
     }
 
@@ -27,7 +27,7 @@
     if ($resultado->num_rows === 0) {
         $stmt->close();
         $conexion->close();
-        header("Location: catalogo.php");
+        header("Location: ../catalogo.php");
         exit;
     }
 
@@ -36,12 +36,6 @@
 
     $boletosDisponibles = intval($sorteo['boletosRestantes']);
     $totalSeleccionados = count($numerosSeleccionados);
-
-    // Evitar que se seleccionen más boletos de los disponibles
-    if ($totalSeleccionados > $boletosDisponibles) {
-        echo "<script>alert('Error: seleccionaste más boletos de los disponibles'); window.location.href='detallesSorteo.php?Sorteo=$idSorteo';</script>";
-        exit;
-    }
 
     // Insertar boletos seleccionados
     $stmtInsert = $conexion->prepare("INSERT INTO boleto (idBoleto, numero, idUsuario, idSorteo) VALUES (?, ?, ?, ?)");
@@ -63,8 +57,4 @@
     $stmtUpdate->close();
 
     $conexion->close();
-
-    // Redirigir con mensaje de confirmación
-    echo "<script>alert('¡Compra realizada con éxito!'); window.location.href='detallesSorteo.php?Sorteo=$idSorteo';</script>";
-    exit;
 ?>

@@ -2,7 +2,7 @@
     require 'conexion.php';
     session_start();
 
-    $idSorteo = rand(0, 10000000000);
+    $idSorteo = rand(0, 1000000000);
     $nombreSorteo = $_POST["nombreSorteo"];
     $descripcion = $_POST["descripcion"];
     $enlaceImagen = $_POST["enlaceImagen"];
