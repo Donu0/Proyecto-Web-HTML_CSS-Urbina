@@ -31,9 +31,10 @@
 
     // Redirigir al sandbox de PayPal
     $paypal_url = "https://www.sandbox.paypal.com/cgi-bin/webscr"; // cambia a www.paypal.com en producción
-    $paypal_id =  "sortec@correo.com";
+    $paypal_id =  "sortec@correo.com"; 
+    // $return_url = "http://localhost/includes/confirmacionPDT.php"; No jala, hay que ver por qué
     $return_url = "http://localhost/includes/receptorPaypal.php";
-    $cancel_url = "http://localhost/detallesSorteo.php?Sorteo=$idSorteo.php";
+    $cancel_url = "http://localhost/detallesSorteo.php?Sorteo=$idSorteo";
 
     // Construir la URL con los parámetros GET, para que todo se mantenga con php
     $query = http_build_query([
@@ -47,7 +48,7 @@
         'cancel_return' => $cancel_url,
         'no_shipping' => '1',
         'lc' => 'es_MX',
-        'image_url' => 'http://localhost/images/logo.png'
+        'image_url' => 'https://picsum.photos/id/1015/800/300'
     ]);
 
     // Redirigir al usuario a PayPal con PHP

@@ -64,6 +64,7 @@
     }
     $stmtInsert->close();
 
+    //Actualizar los boletos restantes en el sorteo
     $stmtUpdate = $conexion->prepare("UPDATE Sorteo SET boletosRestantes = ? WHERE idSorteo = ?");
     $stmtUpdate->bind_param("ii", $nuevosRestantes, $idSorteo);
     $stmtUpdate->execute();
