@@ -5,7 +5,7 @@
     // Para el pago con paypal o alguna otra forma de pago
     $baseUrl = 'https://localhost/Proyecto-Web-HTML_CSS-Urbina/';
 
-    // Validar que venga el parámetro id
+    // Validar que venga el parámetro.
     if (!isset($_GET['Sorteo']) || empty($_GET['Sorteo'])) {
         header("Location: catalogo.php");
         exit;
@@ -13,14 +13,13 @@
 
     $idSorteo = $_GET['Sorteo'];
 
-    // Consultar datos del usuario
+    // Consultar datos del sorteo
     $stmt = $conexion->prepare("SELECT * FROM Sorteo WHERE idSorteo = ?");
     $stmt->bind_param("s", $idSorteo);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows === 0) {
-        // Si no existe, rediriger a la interfaz de admin
         $stmt->close();
         $conn->close();
         header("Location: catalogo.php");
@@ -36,7 +35,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- Si esto da error, lo cambiamos. -->
+    <title><?php echo htmlspecialchars($sorteo['nombreSorteo']); ?></title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>

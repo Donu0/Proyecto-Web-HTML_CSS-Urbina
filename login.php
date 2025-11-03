@@ -30,6 +30,7 @@ if ($result->num_rows > 0) {
         }
         exit;
     } else {
+        // Tantito JS?
         echo "<script>alert('Contraseña incorrecta'); window.location.href='acceder.php';</script>";
     }
 } else {

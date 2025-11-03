@@ -34,6 +34,25 @@
         exit;
     }
 
+    // Extraer txn_id de la respuesta de paypal.
+        $txn_id = null;
+        foreach ($lines as $line) {
+            if (strpos($line, "txn_id=") === 0) {
+                $txn_id = substr($line, 7);
+                break;
+            }
+        }
+
+        // No insertar tickets dos veces.
+        if (isset($_SESSION['last_txn']) && $_SESSION['last_txn'] === $txn_id) {
+            header("Location: ../detallesSorteo.php?Sorteo=" . ($_SESSION['idSorteo_compra'] ?? ''));
+            exit;
+        }
+
+        // Marcar la transaccion como procesada.
+        $_SESSION['last_txn'] = $txn_id;
+
+
     // Si la transacción fue válida
     $idSorteo = $_SESSION['idSorteo_compra'];
     $numerosSeleccionados = $_SESSION['numeros_seleccionados'];

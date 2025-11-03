@@ -2,7 +2,7 @@
     session_start();
     require 'conexion.php';
 
-    // Tu PayPal PDT Identity Token
+    // PayPal PDT Identity Token
     $paypal_pdt_token = "Ipd1GKxh4AKP3rFGaLaHYMpg9udBEchkTSeuOB2BZjcfg0O2rBkgZrM-gx0"; 
     $paypal_url = "https://www.sandbox.paypal.com/cgi-bin/webscr"; // Usa sandbox si estás probando
 
@@ -44,6 +44,15 @@
         $payment_amount = $data['mc_gross'];
         $item_name = $data['item_name'];
         $payment_status = $data['payment_status'];
+
+        // Prevenir duplicados y doble pago.
+        if (isset($_SESSION['last_txn']) && $_SESSION['last_txn'] === $txn_id) {
+            header("Location: ../detallesSorteo.php?Sorteo=" . ($_SESSION['idSorteo_compra'] ?? ''));
+            exit;
+        }
+
+        // Marcar la transaccion como procesada y que ya no se vuelva a hacer.
+        $_SESSION['last_txn'] = $txn_id;
 
         
         $numerosSeleccionados = $_SESSION['numeros_seleccionados'];
