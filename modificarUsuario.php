@@ -14,7 +14,7 @@
     $idUsuario = $_GET['Usuario'];
 
     // Consultar datos del usuario
-    $stmt = $conexion->prepare("SELECT * FROM Usuario WHERE idUsuario = ?");
+    $stmt = $conexion->prepare("SELECT * FROM usuario WHERE idUsuario = ?");
     $stmt->bind_param("s", $idUsuario);
     $stmt->execute();
     $result = $stmt->get_result();

@@ -4,7 +4,7 @@
 
     // PayPal PDT Identity Token
     $paypal_pdt_token = "Ipd1GKxh4AKP3rFGaLaHYMpg9udBEchkTSeuOB2BZjcfg0O2rBkgZrM-gx0"; 
-    $paypal_url = "https://www.sandbox.paypal.com/cgi-bin/webscr"; // Usa sandbox si estás probando
+    $paypal_url = "https://www.sandbox.paypal.com/cgi-bin/webscr"; 
 
     if (!isset($_GET['tx'])) {
         die("No se recibió el parámetro de transacción (tx).");
@@ -58,14 +58,15 @@
         $numerosSeleccionados = $_SESSION['numeros_seleccionados'];
         $idSorteo = $_SESSION['idSorteo_compra']; //No puede ser null
         $idUsuario = $_SESSION['idUsuario'] ?? null;
+        $idCompra = $txn_id;
 
         // Para verificar que la compra se realizó correctamente
         if ($payment_status === 'Completed' && $idSorteo && !empty($numerosSeleccionados)) {
             // Insertar boletos comprados en la base de datos
-            $stmt = $conexion->prepare("INSERT INTO boleto (idBoleto, numero, idUsuario, idSorteo) VALUES (?, ?, ?, ?)");
+            $stmt = $conexion->prepare("INSERT INTO boleto (idBoleto, numero, idUsuario, idSorteo, idCompra) VALUES (?, ?, ?, ?, ?)");
             foreach ($numerosSeleccionados as $num) {
                 $idBoleto = rand(0, 10000000);
-                $stmt->bind_param("ssss", $idBoleto, $num, $idUsuario, $idSorteo);
+                $stmt->bind_param("sssss", $idBoleto, $num, $idUsuario, $idSorteo, $idCompra);
                 $stmt->execute();
             }
             $stmt->close();
@@ -73,7 +74,7 @@
             // Actualizar boletos restantes del sorteo
             $stmt = $conexion->prepare("UPDATE sorteo SET boletosRestantes = boletosRestantes - ? WHERE idSorteo = ?");
             $totalBoletos = count($numerosSeleccionados);
-            $stmt->bind_param("ii", $cantidadComprada, $idSorteo);
+            $stmt->bind_param("ii", $totalBoletos, $idSorteo);
             $stmt->execute();
             $stmt->close();
 

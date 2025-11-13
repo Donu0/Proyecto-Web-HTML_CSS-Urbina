@@ -13,7 +13,7 @@
     $totalBoletos = count($numerosSeleccionados); //Los números seleccionados por el usuario para comprar
 
     // Obtener precio del sorteo
-    $stmt = $conexion->prepare("SELECT precioBoleto, nombreSorteo FROM Sorteo WHERE idSorteo = ?");
+    $stmt = $conexion->prepare("SELECT precioBoleto, nombreSorteo FROM sorteo WHERE idSorteo = ?");
     $stmt->bind_param("i", $idSorteo);
     $stmt->execute();
     $resultado = $stmt->get_result();
@@ -30,11 +30,13 @@
     $_SESSION['idSorteo_compra'] = $idSorteo;
 
     // Redirigir al sandbox de PayPal
-    $paypal_url = "https://www.sandbox.paypal.com/cgi-bin/webscr"; // cambia a www.paypal.com en producción
+    $paypal_url = "https://www.sandbox.paypal.com/cgi-bin/webscr"; 
     $paypal_id =  "sortec@correo.com"; 
-    // $return_url = "http://localhost/includes/confirmacionPDT.php"; No jala, hay que ver por qué
-    $return_url = "http://localhost/includes/receptorPaypal.php";
+    // $return_url = "https://sortec.page.gd/includes/confirmacionPDT.php"; para cuando este publicado
+    // $cancel_url = "https://sortec.page.gd/detallesSorteo.php?Sorteo=$idSorteo";
+    $return_url = "http://localhost/includes/confirmacionPDT.php"; //En XAMPP
     $cancel_url = "http://localhost/detallesSorteo.php?Sorteo=$idSorteo";
+    
 
     // Construir la URL con los parámetros GET, para que todo se mantenga con php
     $query = http_build_query([

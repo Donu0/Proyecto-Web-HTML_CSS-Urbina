@@ -56,7 +56,7 @@
                         <div class="tabla-responsiva">
                             <?php
                             // Consulta para obtener todos los usuarios
-                                $sql = "SELECT * FROM Usuario";
+                                $sql = "SELECT * FROM usuario";
                                 $resultado = $conexion->query($sql);    
 
                                 if ($resultado->num_rows > 0) {

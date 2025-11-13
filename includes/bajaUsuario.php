@@ -14,7 +14,7 @@
             $placeholders = implode(',', array_fill(0, count($ids_limpios), '?'));
 
             // Preparar consulta segura
-            $sql = "DELETE FROM Usuario WHERE idUsuario IN ($placeholders)";
+            $sql = "DELETE FROM usuario WHERE idUsuario IN ($placeholders)";
             $stmt = $conexion->prepare($sql);
 
             // Vincular parámetros dinámicamente

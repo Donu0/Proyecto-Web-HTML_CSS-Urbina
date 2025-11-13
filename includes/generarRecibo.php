@@ -27,9 +27,10 @@
     $stmt->close();
 
     // Obtener boletos comprados (si existen en la BD)
-    $stmt = $conexion->prepare("SELECT numero FROM boleto WHERE idSorteo = ? AND idUsuario = ?");
+    $stmt = $conexion->prepare("SELECT numero FROM boleto WHERE idSorteo = ? AND idCompra = ?");
     $idUsuario = $_SESSION['idUsuario'] ?? 'No registrado';
-    $stmt->bind_param("is", $idSorteo, $idUsuario);
+	$idCompra = $txn_id;
+    $stmt->bind_param("is", $idSorteo, $idCompra);
     $stmt->execute();
     $res = $stmt->get_result();
 

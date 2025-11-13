@@ -14,7 +14,7 @@
     $idSorteo = $_GET['Sorteo'];
 
     // Consultar datos del usuario
-    $stmt = $conexion->prepare("SELECT * FROM Sorteo WHERE idSorteo = ?");
+    $stmt = $conexion->prepare("SELECT * FROM sorteo WHERE idSorteo = ?");
     $stmt->bind_param("s", $idSorteo);
     $stmt->execute();
     $result = $stmt->get_result();

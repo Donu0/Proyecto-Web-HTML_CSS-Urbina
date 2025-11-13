@@ -73,7 +73,7 @@
     $totalComprados = count($numerosSeleccionados);
     $nuevosRestantes = $boletosRestantes - $totalComprados;
 
-    $stmtInsert = $conexion->prepare("INSERT INTO Boleto (idBoleto, numero, idUsuario, idSorteo) VALUES (?, ?, ?, ?)");
+    $stmtInsert = $conexion->prepare("INSERT INTO boleto (idBoleto, numero, idUsuario, idSorteo) VALUES (?, ?, ?, ?)");
     foreach ($numerosSeleccionados as $num) {
         $idBoleto = rand(0, 10000000);
         $num = intval($num);
@@ -84,7 +84,7 @@
     $stmtInsert->close();
 
     //Actualizar los boletos restantes en el sorteo
-    $stmtUpdate = $conexion->prepare("UPDATE Sorteo SET boletosRestantes = ? WHERE idSorteo = ?");
+    $stmtUpdate = $conexion->prepare("UPDATE sorteo SET boletosRestantes = ? WHERE idSorteo = ?");
     $stmtUpdate->bind_param("ii", $nuevosRestantes, $idSorteo);
     $stmtUpdate->execute();
     $stmtUpdate->close();

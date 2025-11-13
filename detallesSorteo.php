@@ -3,7 +3,7 @@
     require 'includes/conexion.php';
 
     // Para el pago con paypal o alguna otra forma de pago
-    $baseUrl = 'https://localhost/Proyecto-Web-HTML_CSS-Urbina/';
+    $baseUrl = 'http://localhost/Proyecto-Web-HTML_CSS-Urbina/';
 
     // Validar que venga el parámetro.
     if (!isset($_GET['Sorteo']) || empty($_GET['Sorteo'])) {
@@ -14,7 +14,7 @@
     $idSorteo = $_GET['Sorteo'];
 
     // Consultar datos del sorteo
-    $stmt = $conexion->prepare("SELECT * FROM Sorteo WHERE idSorteo = ?");
+    $stmt = $conexion->prepare("SELECT * FROM sorteo WHERE idSorteo = ?");
     $stmt->bind_param("s", $idSorteo);
     $stmt->execute();
     $result = $stmt->get_result();
