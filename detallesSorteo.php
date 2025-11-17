@@ -71,7 +71,7 @@
             <div class="contenedor-detalles">
                 <h2><?php echo htmlspecialchars($sorteo['nombreSorteo']); ?></h2>
                 <h3><?php echo htmlspecialchars($sorteo['fechaJuego']); ?></h3>
-                <p><?php echo htmlspecialchars($sorteo['descripcion']); ?></p>
+                <p class="center"><?php echo htmlspecialchars($sorteo['descripcion']); ?></p>
                 <img src="<?php echo $sorteo['enlaceImagen']?>" alt="Imagen random"> 
                 <br>
                 <h3>🎟️ Selecciona tus boletos</h3>
@@ -79,7 +79,7 @@
                 <form action="includes/procesarCompra.php" method="POST">
                     <input type="hidden" name="idSorteo" value="<?php echo htmlspecialchars($sorteo['idSorteo']); ?>">
                     <div class="boletos">
-                        <?php
+                        <?php 
                         $disponibles = intval($sorteo['boletosRestantes']);
                         //Arreglo dinámico para guardar los números de los boletos comprados
                         $comprados = [];
@@ -97,47 +97,87 @@
 
                         //Los boletos comprados no se muestran
 
-                        for ($i = 1; $i <= $disponibles; $i++) {
-                            if (!in_array($i, $comprados)) {
-                                echo "
-                                    <input type='checkbox' id='num$i' name='numeros[]' value='$i'>
-                                    <label for='num$i'>$i</label>
-                                ";
-                            }
-                        }
-                        
-                        // Los boletos comprados se muestran como no disponibles
-
-                        //$totalBoletos = $disponibles + count($comprados); // Para que se muestren todos los boletos
-
-                        // for ($i = 1; $i <= $totalBoletos; $i++) {
-                        //     if (in_array($i, $comprados)) {
-                        //         // Boleto ya comprado su checkbox es rojo y deshabilitado, en teoría, nomás los muestra deshabilitados
-                        //         echo "
-                        //             <input type='checkbox' id='num$i' disabled class='boleto-comprado'>
-                        //             <label for='num$i' class='boleto-label'>$i</label>
-                        //         ";
-                        //     } else {
-                        //         // Boleto disponible tiene checkbox normal
+                        // for ($i = 1; $i <= $disponibles; $i++) {
+                        //     if (!in_array($i, $comprados)) {
                         //         echo "
                         //             <input type='checkbox' id='num$i' name='numeros[]' value='$i'>
-                        //             <label for='num$i' class='boleto-label'>$i</label>
+                        //             <label for='num$i'>$i</label>
                         //         ";
                         //     }
                         // }
-                        ?>
+                        
+                        // Los boletos comprados se muestran como no disponibles
+
+                        $totalBoletos = $disponibles + count($comprados); // Para que se muestren todos los boletos
+
+                        for ($i = 1; $i <= $totalBoletos; $i++) {
+
+                            $id = "num$i";
+                            $isSold = in_array($i, $comprados);
+
+                            if ($isSold) {
+                                echo "
+                                    <input type='checkbox' id='$id' disabled class='boleto-checkbox boleto-comprado'>
+                                    <label for='$id' class='boleto-label'>$i</label>
+                                ";
+                            } else {
+                                echo "
+                                    <input type='checkbox' id='$id' name='numeros[]' value='$i' class='boleto-checkbox'>
+                                    <label for='$id' class='boleto-label'>$i</label>
+                                ";
+                            }
+                        }
+
+                       ?>
                     </div>
-                    <div>
-                        <button type="submit" class="boton">Comprar seleccionados</button>
+
+                    <div class="center">
+                        <p>Boletos seleccionados: <span id="count">0</span></p>
+                        <p>Total a pagar: $<span id="total">0</span>.00</p>
+                    </div>
+
+                    <div class="center">
+                        
+                        <button type="submit" class="boton centrado">Comprar seleccionados</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-
     <footer class="footer">
         <p>Todos los derechos reservados. (Logitos de copyright y TM)</p>
     </footer>
 </body>
-</html>
+
+<script>
+(function () {
+
+    const pricePerTicket = <?php echo intval($sorteo['precioBoleto']); ?>;
+
+    // correct class selector
+    const checkboxes = document.querySelectorAll(
+        '.boleto-checkbox[name="numeros[]"]:not([disabled])'
+    );
+
+    const countElem = document.getElementById('count');
+    const totalElem = document.getElementById('total');
+
+    function updateCount() {
+        const selected = document.querySelectorAll(
+            '.boleto-checkbox[name="numeros[]"]:checked'
+        ).length;
+
+        countElem.textContent = selected;
+        totalElem.textContent = selected * pricePerTicket;
+    }
+
+    // add event listeners
+    checkboxes.forEach(cb => cb.addEventListener('change', updateCount));
+
+    // initialize
+    updateCount();
+
+})();
+</script>
+

@@ -164,32 +164,41 @@ Pero habria que ver como hacerle para acomodarlos imagen por imagen. Que tal que
 }
 
 .carousel {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
     width: 100%;
-    height: 100%;
-}
-
-.carousel::-webkit-scrollbar {
-    display: none; /* No quiero que se vea la barra toda fea */
-}
-
-.carousel-item {
-    flex: none;
-    scroll-snap-align: center;
-    width: 100%;
-    height: 100%;
+    overflow: hidden;
     position: relative;
 }
 
-.carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 15px;
+.carousel-track {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
 }
+
+.slide {
+    min-width: 100%;
+}
+
+.carousel img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.carousel button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: #222;
+    color: #fff;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.prev { left: 0; }
+.next { right: 0; }
 
 .contenido-hero {
     position: relative;
@@ -435,14 +444,18 @@ button:hover {
 
 
 .tabla-responsiva {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch; 
+    width: 100%;
+    max-width: 60rem;         
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    display: block;         
+    box-sizing: border-box;  
+
 }
 
 @media (max-width: 768px) {
     .tabla-responsiva {
-        max-width: 40rem;  /*Solucion super simple para evitar el overflow?*/ 
+        max-width: 35rem;  /*Solucion super simple para evitar el overflow?*/ 
     }
 }
 
@@ -471,25 +484,18 @@ nav form button:hover {
     width:100%;
 }
 
-.boletos {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center; /* centers children horizontally */
-    justify-content: center;
-    gap: 1rem;
-    background-color: var(--rojo);
-    padding: 2rem;
-    width: 100%;
-}
+
 
 /* Estilos para la selección de boletos que generó GPT*/
 /* Contenedor general de boletos */
 .boletos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;       /* <–– allows horizontal rows */
+    gap: 8px;
+    justify-content: center;
+    padding: 2rem;
+    background-color: var(--rojo);
+    width: 100%;
 }
 
 /* Checkbox normal ????*/
@@ -499,14 +505,18 @@ nav form button:hover {
 
 /* Etiquetas visuales para los boletos */
 .boleto-label {
-  display: inline-block;
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  cursor: pointer;
-  background-color: #f0f0f0;
-  transition: all 0.2s ease;
-  user-select: none;
+    color: black;
+    display: inline-block;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    transition: all 0.2s ease;
+    user-select: none;
+    width: 4.4rem;        /* all same width */
+    text-align: center; /* centers the number */
+
 }
 
 /* Cuando el boleto está seleccionado */
@@ -523,4 +533,21 @@ nav form button:hover {
   color: #a70000;
   cursor: not-allowed;
   opacity: 0.7;
+}
+
+.boletos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.boleto-checkbox {
+    display: none;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }

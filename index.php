@@ -41,10 +41,16 @@
     <!-- Despues de eso que ams poner?-->
     <section class="contenedor hero">
         <div class="carousel">
-            <div class="carousel-item"><img src="https://picsum.photos/id/1015/800/300" alt="1"></div>
-            <div class="carousel-item"><img src="https://picsum.photos/id/1016/800/300" alt="2"></div>
-            <div class="carousel-item"><img src="https://picsum.photos/id/1018/800/300" alt="3"></div>
-            <div class="carousel-item"><img src="https://picsum.photos/id/1020/800/300" alt="4"></div>
+            <button class="prev">‹</button>
+            
+            <div class="carousel-track">
+                <div class="slide"><img src="https://picsum.photos/id/1018/800/300" /></div>
+                <div class="slide"><img src="https://picsum.photos/id/1016/800/300" /></div>
+                <div class="slide"><img src="https://picsum.photos/id/1019/800/300" /></div>
+                
+            </div>
+
+            <button class="next">›</button>
         </div>
     </section>
 
@@ -139,3 +145,26 @@
 
 </body>
 </html>
+
+<script>
+    const track = document.querySelector('.carousel-track');
+    const imgs = document.querySelectorAll('.carousel img');
+    let index = 0;
+
+    function updateSlide() {
+        const width = track.clientWidth;
+        track.style.transform = `translateX(-${index * width}px)`;
+    }
+
+    document.querySelector('.next').onclick = () => {
+        index = (index + 1) % imgs.length;
+        updateSlide();
+    };
+
+    document.querySelector('.prev').onclick = () => {
+        index = (index - 1 + imgs.length) % imgs.length;
+        updateSlide();
+    };
+
+    window.onresize = updateSlide;
+</script>

@@ -31,7 +31,7 @@
             if ($sesion_activa) {
                 // Si el usuario es admin
                 if ($_SESSION['rol'] === 'admin') {
-                    echo '<a href="./admiInterface.php">Admin Panel</a>';
+                    echo '<a href="./adminInterface.php">Admin Panel</a>';
                 }
                 // Si el usuario tiene sesión activa
                 echo '<a href="./logout.php">Cerrar sesión</a>';
@@ -103,7 +103,7 @@
                     <form method="POST" action="./includes/bajaSorteo.php" style="display:inline;">
                         <div class="tabla-responsiva">
                             <?php
-                            // Consulta para obtener todos los usuarios
+                            // Consulta para obtener todos los sorteos
                                 $sql = "SELECT * FROM sorteo";
                                 $resultado = $conexion->query($sql);    
 
