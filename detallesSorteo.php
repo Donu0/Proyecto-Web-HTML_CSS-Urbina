@@ -94,17 +94,6 @@
                         }
 
                         $stmtBoletos->close();
-
-                        //Los boletos comprados no se muestran
-
-                        // for ($i = 1; $i <= $disponibles; $i++) {
-                        //     if (!in_array($i, $comprados)) {
-                        //         echo "
-                        //             <input type='checkbox' id='num$i' name='numeros[]' value='$i'>
-                        //             <label for='num$i'>$i</label>
-                        //         ";
-                        //     }
-                        // }
                         
                         // Los boletos comprados se muestran como no disponibles
 

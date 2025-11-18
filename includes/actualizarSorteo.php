@@ -17,7 +17,7 @@
         if ($idSorteo!="" && $nombreSorteo!="" && $descripcion!="" && $enlaceImagen!="" && $fechaJuego!="" && $organizador!="" && $boletosRestantes!="" && $precioBoleto!="") {
             $stmt = $conexion->prepare("UPDATE sorteo SET nombreSorteo = ?, descripcion = ?, enlaceImagen = ?, fechaJuego = ?, organizador = ?, boletosRestantes = ?, precioBoleto = ? WHERE idSorteo = ?");
             $stmt->bind_param("ssssssss", $nombreSorteo, $descripcion, $enlaceImagen, $fechaJuego, $organizador, $boletosRestantes, $precioBoleto, $idSorteo);
-                            // Ni que fuera serpiente
+                            // Ni que fuera serpiente, no jala bien si pongo los tipos correctos :/
             $stmt->execute();
             $stmt->close();
         }

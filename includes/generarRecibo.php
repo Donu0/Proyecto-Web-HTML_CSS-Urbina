@@ -3,14 +3,14 @@
     require('conexion.php');
     session_start();
 
-    // Verificar que lleguen los datos de la compra
+    // Verificar que lleguen los datos de la compra, por si acaso
     if (!isset($_GET['txn_id'])) {
         die("No se recibió información de la compra.");
     }
 
     $txn_id = $_GET['txn_id']; // ID de transacción PayPal
     $idSorteo = $_GET['idSorteo'] ?? '';
-    $numerosComprados = explode(",", $_GET['numeros'] ?? '');
+    $numerosComprados = explode(",", $_GET['numeros'] ?? ''); //¿Por qué PHP?
     $total = $_GET['total'] ?? '0.00';
 
     // Obtener datos del sorteo
@@ -26,8 +26,8 @@
     $sorteo = $result->fetch_assoc();
     $stmt->close();
 
-    // Obtener boletos comprados (si existen en la BD)
-    $stmt = $conexion->prepare("SELECT numero FROM boleto WHERE idSorteo = ? AND idCompra = ?");
+    // Obtener boletos comprados (Al comprarse se forman, entonces si existen) y los ordena ascendentes por número
+    $stmt = $conexion->prepare("SELECT numero FROM boleto WHERE idSorteo = ? AND idCompra = ? ORDER BY numero");
     $idUsuario = $_SESSION['idUsuario'] ?? 'No registrado';
 	$idCompra = $txn_id;
     $stmt->bind_param("is", $idSorteo, $idCompra);
@@ -80,7 +80,11 @@
     // Descargar PDF
     $pdf->Output('D', "Recibo_Sorteo_{$idSorteo}.pdf");
 
-    //Después de descargar el recibo, redirigir al detalle del sorteo, pero redirige antes de descargar, nose por qué
-    //header("Location: ../detallesSorteo.php?Sorteo=$idSorteo");
     exit;
 ?>
+
+<script> //Para redireccionar a la página de los detalles del sorteo
+    setTimeout(() => {
+        window.location.href = "detallesSorteo.php?id=<?php echo $_GET['idSorteo']; ?>";
+    }, 1000);
+</script>
