@@ -3,7 +3,6 @@ session_start();
 require 'conexion.php';
 
 // Este archivo no redirige. Solo define variables de sesión si existen.
-// Así puedes incluirlo en cualquier página (pública o privada) y decidir qué hacer.
 
 $sesion_activa = false;
 $usuario_nombre = "";
