@@ -42,7 +42,7 @@
                     echo '<h2>Añadir Usuarios</h2>';
                     echo '<p>Llena los campos pertinentes para añadir un nuevo usuario</p>';
                 } else {
-                    echo '<h2>Resgistro</h2>';
+                    echo '<h2>Registro</h2>';
                     echo '<p>Registrate llenando los campos con tus datos</p>';
                 }
             ?>
@@ -54,29 +54,40 @@
 
                         <div class="campo">
                             <label>Nombre</label>
-                            <input class="input-text" type="text" name="nombre" placeholder="Tu Nombre">
+                            <input class="input-text" type="text" name="nombre" id="nombre" placeholder="Tu Nombre">
+                            <div class="error" id="nombreError"></div>
                         </div>
 
                         <div class="campo">
                             <label>Apellido</label>
-                            <input class="input-text" type="text" name="apellido" placeholder="Tu Apellido">
+                            <input class="input-text" type="text" name="apellido" id="apellido" placeholder="Tu Apellido">
+                            <div class="error" id="apellidoError"></div>
                         </div>
 
                         <div class="campo">
                             <label>Teléfono</label>
-                            <input class="input-text" type="text" name="telefono" placeholder="Tu Teléfono">
+                            <input class="input-text" type="text" name="telefono" id="telefono" placeholder="Tu Teléfono">
+                            <div class="error" id="telefonoError"></div>
                         </div>
 
                         <div class="campo">
                             <label>Correo</label>
-                            <input class="input-text" type="email" name="correo" placeholder="Tu Email">
+                            <input class="input-text" type="email" name="correo" id="correo" placeholder="Tu Email">
+                            <div class="error" id="correoError"></div>
                         </div>
 
                         <div class="campo">
                             <label>Contraseña</label>
-                            <input class="input-text" type="password" name="contrasena" placeholder="Tu Contraseña">
+                            <input class="input-text" type="password" name="contrasena" id="contrasena" placeholder="Tu Contraseña">
+                            <div class="error" id="contrasenaError"></div>
                         </div>
                         
+                        <div class="campo">
+                            <label>Confirmar contraseña</label>
+                            <input class="input-text" type="password" name="contrasena2" id="contrasena2" placeholder="Confirma tu contraseña">
+                            <div class="error" id="contrasena2Error"></div>
+                        </div>
+
                         <?php
                             if ($sesion_activa && $_SESSION['rol'] === 'admin') {
                             // Si el usuario es admin
@@ -112,6 +123,8 @@
     <footer class="footer">
         <p>Todos los derechos reservados. (Logitos de copyright y TM)</p>
     </footer>
-    
+
+    <!-- Validación de los campos del formulario -->
+    <script src="scripts/validacionUsuario.js"></script>
 </body>
 </html>

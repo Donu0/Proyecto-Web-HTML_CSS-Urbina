@@ -552,3 +552,19 @@ nav form button:hover {
     justify-content: center;
     width: 100%;
 }
+
+/*Me lo dio el seño G, no se si jale, pero es para mostrar que los inputs estan bien o mal*/
+.input-text.valid {
+    border: 2px solid #28a745 !important; /* verde */
+}
+
+.input-text.invalid {
+    border: 2px solid #dc3545 !important; /* rojo */
+}
+
+.error {
+    color: #ff3b3b;
+    font-size: 0.9rem;
+    margin-top: 3px;
+}
+
