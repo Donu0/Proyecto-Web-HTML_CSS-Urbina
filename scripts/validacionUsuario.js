@@ -43,9 +43,7 @@ function validarCampo(input, validator, errorDiv, errorMessage) {
     return true;
 }
 
-// -------------------------------------------------------
-// VALIDACIÓN COMPLETA DEL FORMULARIO
-// -------------------------------------------------------
+// Validación de todo el formulario
 
 window.addEventListener("DOMContentLoaded", () => {
 

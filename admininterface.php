@@ -28,17 +28,24 @@
             <a href="./quienesSomos.php">Quienes somos?</a>
             <a href="./catalogo.php">Catalogo</a>
             <?php
-            if ($sesion_activa) {
-                // Si el usuario es admin
-                if ($_SESSION['rol'] === 'admin') {
-                    echo '<a href="./adminInterface.php">Admin Panel</a>';
+                if ($sesion_activa) {
+                    $nombreUsuario = $_SESSION['nombre'];
+                    
+                    if ($_SESSION['rol'] === 'admin') {
+                        echo '<a href="./adminInterface.php">Admin Panel</a>';
+                    }
+
+                    echo '
+                        <div class="user-menu">
+                            <button class="user-btn">Hola, ' . htmlspecialchars($nombreUsuario) . ' ▼</button>
+                            <div class="user-dropdown">
+                                <a href="./logout.php">Cerrar sesión</a>
+                            </div>
+                        </div>
+                    ';
+                } else {
+                    echo '<a href="./acceder.php">Acceder</a>';
                 }
-                // Si el usuario tiene sesión activa
-                echo '<a href="./logout.php">Cerrar sesión</a>';
-            } else {
-                // Si no ha iniciado sesión
-                echo '<a href="./acceder.php">Acceder</a>';
-            }
             ?>
         </nav> 
     </div> 
@@ -170,5 +177,7 @@
     <footer class="footer">
         <p>Todos los derechos reservados. (Logitos de copyright y TM)</p>
     </footer>
+
+    <script src="scripts/menuDesplegable.js"></script>
 </body>
 </html>

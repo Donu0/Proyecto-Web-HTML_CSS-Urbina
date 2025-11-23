@@ -16,7 +16,7 @@
     <div class="nav-bg">
         <nav class="navegacion-principal contenedor">
             <a href="./index.php">Inicio</a>
-            <a href="./quienesSomos.html">Quienes somos?</a>
+            <a href="./quienesSomos.php">Quienes somos?</a>
             <a href="./catalogo.php">Catalogo</a>
             <?php
             if ($sesion_activa) {

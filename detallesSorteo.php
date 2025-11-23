@@ -51,17 +51,24 @@
             <a href="./quienesSomos.php">Quienes somos?</a>
             <a href="./catalogo.php">Catalogo</a>
             <?php
-            if ($sesion_activa) {
-                // Si el usuario es admin
-                if ($_SESSION['rol'] === 'admin') {
-                    echo '<a href="./adminInterface.php">Admin Panel</a>';
+                if ($sesion_activa) {
+                    $nombreUsuario = $_SESSION['nombre'];
+                    
+                    if ($_SESSION['rol'] === 'admin') {
+                        echo '<a href="./adminInterface.php">Admin Panel</a>';
+                    }
+
+                    echo '
+                        <div class="user-menu">
+                            <button class="user-btn">Hola, ' . htmlspecialchars($nombreUsuario) . ' ▼</button>
+                            <div class="user-dropdown">
+                                <a href="./logout.php">Cerrar sesión</a>
+                            </div>
+                        </div>
+                    ';
+                } else {
+                    echo '<a href="./acceder.php">Acceder</a>';
                 }
-                // Si el usuario tiene sesión activa
-                echo '<a href="./logout.php">Cerrar sesión</a>';
-            } else {
-                // Si no ha iniciado sesión
-                echo '<a href="./acceder.php">Acceder</a>';
-            }
             ?>
         </nav>
     </div> 
@@ -72,7 +79,7 @@
                 <h2><?php echo htmlspecialchars($sorteo['nombreSorteo']); ?></h2>
                 <h3><?php echo htmlspecialchars($sorteo['fechaJuego']); ?></h3>
                 <p class="center"><?php echo htmlspecialchars($sorteo['descripcion']); ?></p>
-                <img src="<?php echo $sorteo['enlaceImagen']?>" alt="Imagen random"> 
+                <img src="<?php echo $sorteo['enlaceImagen']?>" alt="Imagen correspondiente al sorteo"> 
                 <br>
                 <h3>🎟️ Selecciona tus boletos</h3>
                 <p> Precio del boleto: $<?php echo intval($sorteo['precioBoleto']); ?>.00</p>
@@ -84,7 +91,7 @@
                         //Arreglo dinámico para guardar los números de los boletos comprados
                         $comprados = [];
 
-                        $stmtBoletos = $conexion->prepare("SELECT numero FROM Boleto WHERE idSorteo = ?");
+                        $stmtBoletos = $conexion->prepare("SELECT numero FROM boleto WHERE idSorteo = ?");
                         $stmtBoletos->bind_param("i", $idSorteo);
                         $stmtBoletos->execute();
                         $resultBoletos = $stmtBoletos->get_result();
@@ -137,6 +144,8 @@
     <footer class="footer">
         <p>Todos los derechos reservados. (Logitos de copyright y TM)</p>
     </footer>
+
+    <script src="scripts/menuDesplegable.js"></script>
 </body>
 
 <script>
