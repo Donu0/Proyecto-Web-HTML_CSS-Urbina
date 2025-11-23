@@ -38,9 +38,12 @@
     <div class="contenedor">
         <div class="contenido-hero">
                 <p>Quienes somos?</p>
-                <img src="https://picsum.photos/id/1015/800/300" alt="1">
-                <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate, quibusdam dolore molestiae, voluptatum temporibus fugit repellat natus amet ea adipisci, doloremque fugiat est eveniet? Blanditiis veritatis sed vero ipsum cupiditate.
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur blanditiis nemo, eveniet porro itaque odio pariatur facere optio voluptatum vero ipsam vel. Animi, architecto mollitia? Eligendi dignissimos quia veritatis commodi.
+                <img src="https://universidadesgratuitas.com/storage/2023/09/tecnologico-de-la-laguna.jpg" alt="1">
+                <p> En Sortec somos una plataforma diseñada para simplificar la gestión y participación en sorteos. 
+                    Nuestro objetivo es ofrecer una experiencia ágil y fácil de usar, permitiendo a los organizadores administrar 
+                    sus sorteos de manera eficiente y a los compradores adquirir sus números sin complicaciones. Trabajamos para que 
+                    cada función sea clara, rápida y accesible, enfocándonos siempre en hacer que todo el proceso sea lo más 
+                    práctico posible para todos.
                 </p>
         </div>
     </div>

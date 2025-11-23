@@ -127,5 +127,7 @@
         <p>Todos los derechos reservados. (Logitos de copyright y TM)</p>
     </footer>
     
+    <script src="scripts/validacionUsuario.js"></script>
+
 </body>
 </html>

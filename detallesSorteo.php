@@ -152,6 +152,8 @@
     const countElem = document.getElementById('count');
     const totalElem = document.getElementById('total');
 
+    const buyButton = document.querySelector('button[type="submit"]');
+
     function updateCount() {
         const selected = document.querySelectorAll(
             '.boleto-checkbox[name="numeros[]"]:checked'
@@ -159,6 +161,8 @@
 
         countElem.textContent = selected;
         totalElem.textContent = selected * pricePerTicket;
+
+        buyButton.disabled = selected === 0;
     }
 
     // add event listeners

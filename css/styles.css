@@ -165,8 +165,8 @@ Pero habria que ver como hacerle para acomodarlos imagen por imagen. Que tal que
 
 .carousel {
     width: 100%;
-    overflow: hidden;
     position: relative;
+    overflow: hidden;
 }
 
 .carousel-track {
@@ -297,6 +297,13 @@ Pero habria que ver como hacerle para acomodarlos imagen por imagen. Que tal que
     transform: translateY(-1px); 
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3); 
     border-radius: 5px;
+}
+
+.boton[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #bdbdbd !important; /* color apagado */
+    border-color: #9e9e9e !important;
 }
 
 .w-sm-100 {
@@ -553,7 +560,7 @@ nav form button:hover {
     width: 100%;
 }
 
-/*Me lo dio el seño G, no se si jale, pero es para mostrar que los inputs estan bien o mal*/
+/*Es para mostrar que los inputs estan bien o mal*/
 .input-text.valid {
     border: 2px solid #28a745 !important; /* verde */
 }
@@ -564,7 +571,7 @@ nav form button:hover {
 
 .error {
     color: #ff3b3b;
-    font-size: 0.9rem;
+    font-size: 1.5rem;
     margin-top: 3px;
 }
 

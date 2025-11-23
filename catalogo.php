@@ -43,7 +43,7 @@
                         <div class="tabla-responsiva">
                             <?php
                             // Consulta para obtener todos los sorteos disponibles
-                                $sql = "SELECT idSorteo, nombreSorteo, fechaJuego FROM sorteo"; //Aqui iría el otro atributo enlaceImagen
+                                $sql = "SELECT idSorteo, nombreSorteo, fechaJuego, enlaceImagen FROM sorteo"; //Aqui iría el otro atributo enlaceImagen
                                 $resultado = $conexion->query($sql);    
 
                                 if ($resultado->num_rows > 0) {
@@ -51,7 +51,7 @@
                                     while ($fila = $resultado->fetch_assoc()) {
                                         echo "<div class='item-sorteo'>
                                                 <p class='descriptor'>{$fila['nombreSorteo']}</p>
-                                                <img class='img-cont' src='https://picsum.photos/id/1015/800/300' alt='1'>
+                                                <img class='img-cont' src='{$fila['enlaceImagen']}' alt='1'>
                                                 <p hidden>{$fila['idSorteo']}</p>
                                                 <p class='descriptor'> Juega el: {$fila['fechaJuego']}</p>
                                                 <a href='detallesSorteo.php?Sorteo=" . urlencode($fila['idSorteo']) . "' class='boton stretch' title='detalles'>Ver más</a>

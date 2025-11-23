@@ -80,36 +80,43 @@
                         <div class="campo">
                             <label>Nombre Sorteo</label>
                             <input class="input-text" type="text" name="nombreSorteo" value="<?php echo htmlspecialchars($sorteo['nombreSorteo']); ?>" required>
+                            <div id="nombreSorteoError" class="error"></div>
                         </div>
 
                         <div class="campo">
                             <label>Organizador Sorteo</label>
                             <input class="input-text" type="text" name="organizador" value="<?php echo htmlspecialchars($sorteo['organizador']); ?>" required>
+                            <div id="organizadorError" class="error"></div>
                         </div>
 
                         <div class="campo">
                             <label>Numero de boletos</label>
                             <input class="input-text" type="number" name="boletosRestantes" value="<?php echo intval($sorteo['boletosRestantes']); ?>" required>
+                            <div id="boletosRestantesError" class="error"></div>
                         </div>
 
                         <div class="campo">
                             <label>Precio de boletos</label>
                             <input class="input-text" type="number" name="precioBoleto" value="<?php echo intval($sorteo['precioBoleto']); ?>" required>
+                            <div id="precioBoletoError" class="error"></div>
                         </div>
 
                         <div class="campo campo--full">
                             <label>Fecha de termino</label>
                             <input class="input-text" type="date" name="fechaJuego" value="<?php echo htmlspecialchars($sorteo['fechaJuego']); ?>" required>
+                            <div id="fechaJuegoError" class="error"></div>
                         </div>
 
                         <div class="campo campo--full">
                             <label>Descripcion Sorteo</label>
                             <input class="input-text" type="text" name ="descripcion" value="<?php echo htmlspecialchars($sorteo['descripcion']); ?>" required>
+                            <div id="descripcionError" class="error"></div>
                         </div> 
                         
                         <div class="campo campo--full">
                             <label>Imagen del Sorteo</label>
                             <input class="input-text" type="url" name="enlaceImagen" value="<?php echo urlencode($sorteo['enlaceImagen']); ?>" required>
+                            <div id="enlaceImagenError" class="error"></div>
                         </div>
                     
                     </div>  
@@ -129,5 +136,7 @@
         <p>Todos los derechos reservados. (Logitos de copyright y TM)</p>
     </footer>
     
+    <script src="scripts/validacionSorteo.js"></script>
+
 </body>
 </html>

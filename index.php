@@ -1,4 +1,6 @@
-<?php include 'includes/verificarSesion.php'; ?>
+<?php include 'includes/verificarSesion.php';?>
+<?php include 'includes/enviarCorreo.php';?> 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sortec</title>
     <link rel="stylesheet" href="css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="scripts/carrusel.js"></script>
 </head>
 <body>
     <!-- Titulo de la pagina, Sortec. Que fuente?-->
@@ -44,10 +48,9 @@
             <button class="prev">‹</button>
             
             <div class="carousel-track">
-                <div class="slide"><img src="https://picsum.photos/id/1018/800/300" /></div>
-                <div class="slide"><img src="https://picsum.photos/id/1016/800/300" /></div>
-                <div class="slide"><img src="https://picsum.photos/id/1019/800/300" /></div>
-                
+                <div class="slide"><img src="https://images.unsplash.com/photo-1515172013099-a1a53deb7927?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z2l2ZWF3YXl8ZW58MHx8MHx8fDA%3D    " /></div>
+                <div class="slide"><img src="https://images.unsplash.com/photo-1515172013099-a1a53deb7927?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z2l2ZWF3YXl8ZW58MHx8MHx8fDA%3D" /></div>
+                <div class="slide"><img src="https://images.unsplash.com/photo-1515172013099-a1a53deb7927?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z2l2ZWF3YXl8ZW58MHx8MHx8fDA%3D" /></div>
             </div>
 
             <button class="next">›</button>
@@ -74,21 +77,15 @@
                 <div class="contenedor-items">
                     <div class="item-sorteo">
                         <p class="descriptor">Sorteos del Tecnologico</p>
-                        <button class="boton">Pagina 1</button>
-                    </div>
-
-                    <div class="item-sorteo">
-                        <p class="descriptor">Sorteos Semanales</p>
-                        <button class="boton">Pagina 2</button>
+                        <button class="boton" onclick="window.location.href='catalogo.php'">Visitar Pagina</button>
                     </div>
 
                     <div class="item-sorteo">
                         <p class="descriptor">Sorteos Nacionales</p>
-                        <button class="boton">Pagina 3</button>
+                        <button class="boton" onclick="window.location.href='https://lotenal.gob.mx/'">Visitar Pagina</button>
                     </div>
                 </div>
 
-                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi unde nesciunt aspernatur minima. Ad quae facilis id quam minus culpa, fugit sit quas officiis porro voluptatem doloribus deleniti aut! Aperiam. </p>
             </div>
         </div>
 
@@ -109,22 +106,26 @@
 
                                 <div class="campo">
                                     <label>Nombre</label>
-                                    <input class="input-text" type="text" placeholder="Tu Nombre">
+                                    <input class="input-text" type="text" placeholder="Tu Nombre" name="nombre">
+                                    <div class="error"></div>
                                 </div>
 
                                 <div class="campo">
                                     <label for="">Teléfono</label>
-                                    <input class="input-text" type="tel" placeholder="Tu Teléfono">
+                                    <input class="input-text" type="tel" placeholder="Tu Teléfono" name="telefono">
+                                    <div class="error"></div>
                                 </div>
 
                                 <div class="campo">
                                     <label>Correo</label>
-                                    <input class="input-text" type="email" placeholder="Tu Email">
+                                    <input class="input-text" type="email" placeholder="Tu Email" name="correo">
+                                    <div class="error"></div>
                                 </div>
 
                                 <div class="campo">
                                     <label>Mensaje</label>
-                                    <textarea class="input-text"></textarea>
+                                    <textarea class="input-text" name="mensaje"></textarea>
+                                    <div class="error"></div>
                                 </div>
 
                             </div> <!-- .contenedor-campos -->
@@ -143,28 +144,37 @@
         <p>Todos los derechos reservados. (Logitos de copyright y TM)</p>
     </footer>
 
+    <script src="scripts/validacionIndex.js"></script>
+
 </body>
 </html>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
-    const track = document.querySelector('.carousel-track');
-    const imgs = document.querySelectorAll('.carousel img');
+    
+
+$(document).ready(function () {
+
+    const $track = $('.carousel-track');
+    const $imgs  = $('.carousel img');
     let index = 0;
 
     function updateSlide() {
-        const width = track.clientWidth;
-        track.style.transform = `translateX(-${index * width}px)`;
+        const width = $track.width();
+        $track.css('transform', `translateX(-${index * width}px)`);
     }
 
-    document.querySelector('.next').onclick = () => {
-        index = (index + 1) % imgs.length;
+    $('.next').on('click', function () {
+        index = (index + 1) % $imgs.length;
         updateSlide();
-    };
+    });
 
-    document.querySelector('.prev').onclick = () => {
-        index = (index - 1 + imgs.length) % imgs.length;
+    $('.prev').on('click', function () {
+        index = (index - 1 + $imgs.length) % $imgs.length;
         updateSlide();
-    };
+    });
 
-    window.onresize = updateSlide;
+    $(window).on('resize', updateSlide);
+});
 </script>

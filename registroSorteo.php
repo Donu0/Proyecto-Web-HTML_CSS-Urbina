@@ -47,36 +47,43 @@
                         <div class="campo">
                             <label>Nombre Sorteo</label>
                             <input class="input-text" type="text" name="nombreSorteo" placeholder="Nombre">
+                            <div id="nombreSorteoError" class="error"></div>
                         </div>
 
                         <div class="campo">
                             <label>Organizador Sorteo</label>
                             <input class="input-text" type="text" name="organizador" placeholder="Organizador">
+                            <div id="organizadorError" class="error"></div>
                         </div>
 
                         <div class="campo">
                             <label>Numero de boletos</label>
                             <input class="input-text" type="number" name="boletosRestantes" placeholder="Ej: 100">
+                            <div id="boletosRestantesError" class="error"></div>
                         </div>
 
                         <div class="campo">
                             <label>Precio de boletos</label>
                             <input class="input-text" type="number" name="precioBoleto" placeholder="Ej: 50">
+                            <div id="precioBoletoError" class="error"></div>
                         </div>
 
                         <div class="campo campo--full">
                             <label>Fecha de termino</label>
                             <input class="input-text" type="date" name="fechaJuego" placeholder="12/12/2012">
+                            <div id="fechaJuegoError" class="error"></div>
                         </div>
 
                         <div class="campo campo--full">
                             <label>Descripcion Sorteo</label>
                             <input class="input-text" type="text" name ="descripcion">
+                            <div id="descripcionError" class="error"></div>
                         </div> 
                         
                         <div class="campo campo--full">
                             <label>Imagen del Sorteo</label>
                             <input class="input-text" type="url" name ="enlaceImagen" placeholder="URL de la imagen">
+                            <div id="enlaceImagenError" class="error"></div>
                         </div> 
         
                     </div> 
@@ -94,5 +101,6 @@
         <p>Todos los derechos reservados. (Logitos de copyright y TM)</p>
     </footer>
     
+    <script src="scripts/validacionSorteo.js"></script>
 </body>
 </html>
