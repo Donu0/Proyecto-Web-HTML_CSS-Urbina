@@ -124,7 +124,7 @@
                                                 <td>{$fila['idSorteo']}</td>
                                                 <td>{$fila['nombreSorteo']}</td>
                                                 <td>{$fila['descripcion']}</td>
-                                                <input type='hidden' name='enlaceImagen' value='" . htmlspecialchars({$fila['enlaceImagen']}) . "'> 
+                                                <input type='hidden' name='enlaceImagen' value='" . htmlspecialchars($fila['enlaceImagen']) . "'> 
                                                 <td>{$fila['fechaJuego']}</td>
                                                 <td>{$fila['organizador']}</td>
                                                 <td>{$fila['boletosRestantes']}</td>
