@@ -3,6 +3,7 @@
     require 'includes/conexion.php';
 
     // Para el pago con paypal o alguna otra forma de pago
+    // $baseUrl = 'https://www.sortec.page.gd/';
     $baseUrl = 'http://localhost/Proyecto-Web-HTML_CSS-Urbina/';
 
     // Validar que venga el parámetro.
