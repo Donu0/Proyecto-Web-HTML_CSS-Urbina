@@ -31,6 +31,65 @@ body {
     box-sizing: inherit;
 }
 
+a{
+    text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block; /* avoids little gaps under the image */
+}
+
+details {
+  background: #094374;
+  border-radius: 8px;
+  margin: 1rem 0;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+summary {
+  font-size: 1.6rem;
+  font-weight: bold;
+  cursor: pointer;
+  list-style: none;
+}
+
+section {
+  margin-top: 1rem;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+  margin-top: 1rem;
+  background: white;
+  color: black;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.8rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+button {
+  background: gray;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  margin: 0.3rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
 .titulo{
     text-align: center;
     color:var(--oro_sec);
@@ -50,6 +109,14 @@ body {
 .nav-bg{ /*  */
     margin:1rem 0;
     background-color:var(--oro);
+}
+
+p a:link{
+    color:white;
+}
+
+p a:visited{
+    color:bisque;
 }
 
 .navegacion-principal{
@@ -97,32 +164,41 @@ Pero habria que ver como hacerle para acomodarlos imagen por imagen. Que tal que
 }
 
 .carousel {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
     width: 100%;
-    height: 100%;
-}
-
-.carousel::-webkit-scrollbar {
-    display: none; /* No quiero que se vea la barra toda fea */
-}
-
-.carousel-item {
-    flex: none;
-    scroll-snap-align: center;
-    width: 100%;
-    height: 100%;
     position: relative;
+    overflow: hidden;
 }
 
-.carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 15px;
+.carousel-track {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
 }
+
+.slide {
+    min-width: 100%;
+}
+
+.carousel img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.carousel button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: #222;
+    color: #fff;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.prev { left: 0; }
+.next { right: 0; }
 
 .contenido-hero {
     position: relative;
@@ -130,6 +206,7 @@ Pero habria que ver como hacerle para acomodarlos imagen por imagen. Que tal que
 
     display: flex;
     flex-direction: column;
+    padding:1rem;
     width:100%;
     align-items: center; /* Esto pq? */
     justify-content: space-evenly;
@@ -204,16 +281,15 @@ Pero habria que ver como hacerle para acomodarlos imagen por imagen. Que tal que
 }
 
 .boton {
-    background-color: gray;
+    background: gray;
     color: white;
-    padding: 1rem;
-    margin-top: 1rem;
-    font-size: 1.6rem;
-    text-transform: uppercase;
+    font-size: medium;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    margin: 0.3rem;
+    border-radius: 5px;
+    cursor: pointer;
     font-weight: bold;
-    border-radius: .5rem;
-    width: 80%;
-    text-align: center;
 }
 
 .boton:hover{
@@ -221,6 +297,13 @@ Pero habria que ver como hacerle para acomodarlos imagen por imagen. Que tal que
     transform: translateY(-1px); 
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3); 
     border-radius: 5px;
+}
+
+.boton[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #bdbdbd !important; /* color apagado */
+    border-color: #9e9e9e !important;
 }
 
 .w-sm-100 {
@@ -256,6 +339,7 @@ section .contenido-hero p{
     width: min(60rem,100%); /* Utiliza el valor mas pequeño */
     margin: 0 auto;
     padding: 2rem;
+    margin-bottom: 1rem;
     border-radius: 1rem;
 }
 
@@ -274,16 +358,15 @@ section .contenido-hero p{
 @media (min-width: 768px) {
     .contenedor-campos {
         display: grid;
-        grid-template-columns: repeat(2,1fr);
-        grid-template-rows: auto auto 20rem;
-        column-gap: 1rem;
+        grid-template-columns: repeat(2, 1fr); /* dos columnas iguales */
+        grid-auto-rows: auto;                   /* altura automática según el contenido */
+        gap: 1rem;                              /* separación uniforme entre filas y columnas */
     }
 
-    .campo:nth-child(3),
-    .campo:nth-child(4) {
-        grid-column: 1 / 3;
+    /* Cualquier campo que deba ocupar todo el ancho (por ejemplo textarea) */
+    .campo--full {
+        grid-column: 1 / -1; /* ocupa ambas columnas */
     }
-
 }
 
 @media (min-width: 768px) {
@@ -312,7 +395,8 @@ section .contenido-hero p{
 }
 
 .campo textarea {
-    height:90%;
+    width: 100%;
+    min-height: 15rem;
 }
 
 @media (max-width: 768px) {
@@ -339,3 +423,195 @@ section .contenido-hero p{
     text-align: center; 
     width: 100%;
 }
+
+details[open] {
+  background: #06335a;
+}
+
+summary::marker {
+  display: none; /* Hide default arrow */
+}
+
+/* Custom arrow */
+summary::before {
+  content: "▶";
+  margin-right: 10px;
+  transition: transform 0.3s;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+
+button:hover {
+  background: #b4b4b4;
+  color: black;
+}
+
+
+.tabla-responsiva {
+    width: 100%;
+    max-width: 60rem;         
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    display: block;         
+    box-sizing: border-box;  
+
+}
+
+@media (max-width: 768px) {
+    .tabla-responsiva {
+        max-width: 35rem;  /*Solucion super simple para evitar el overflow?*/ 
+    }
+}
+
+nav form button {
+    font-family: inherit;
+    font-size: 1rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0;
+}
+
+nav form button:hover {
+    text-decoration: underline;
+}
+
+.contenedor-detalles{
+    margin: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  
+    background-color: var(--rojo);  
+    padding: 2rem;
+    width:100%;
+}
+
+
+
+/* Estilos para la selección de boletos que generó GPT*/
+/* Contenedor general de boletos */
+.boletos {
+    display: flex;
+    flex-wrap: wrap;       /* <–– allows horizontal rows */
+    gap: 8px;
+    justify-content: center;
+    padding: 2rem;
+    background-color: var(--rojo);
+    width: 100%;
+}
+
+/* Checkbox normal ????*/
+/* .boletos input[type="checkbox"] {
+  display: none;
+} */
+
+/* Etiquetas visuales para los boletos */
+.boleto-label {
+    color: black;
+    display: inline-block;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    transition: all 0.2s ease;
+    user-select: none;
+    width: 6rem;        /* all same width */
+    text-align: center; /* centers the number */
+    font-size: 100%;
+
+}
+
+/* Cuando el boleto está seleccionado */
+.boletos input[type="checkbox"]:checked + .boleto-label {
+  background-color: #2ecc71; /* Verde */
+  color: white;
+  border-color: #27ae60;
+}
+
+/* Boletos ya comprados (rojos y deshabilitados) */
+.boleto-comprado + .boleto-label {
+  background-color: #ffcccc;
+  border-color: #ff4d4d;
+  color: #a70000;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.boletos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.boleto-checkbox {
+    display: none;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/*Es para mostrar que los inputs estan bien o mal*/
+.input-text.valid {
+    border: 2px solid #28a745 !important; /* verde */
+}
+
+.input-text.invalid {
+    border: 2px solid #dc3545 !important; /* rojo */
+}
+
+.error {
+    color: #ff3b3b;
+    font-size: 1.5rem;
+    margin-top: 3px;
+}
+
+/*Para el menú desplegable de los usuarios*/
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.user-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.user-dropdown {
+    display: none;
+    position: absolute;
+    background: white;
+    color: black;
+    min-width: 140px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    z-index: 100;
+}
+
+.user-dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.user-dropdown a:hover {
+    background-color: #f2f2f2;
+}
+
+.user-menu.active .user-dropdown {
+    display: block;
+}
+
